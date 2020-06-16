@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat";
+    background: -webkit-linear-gradient(to right, #2ebf91, #8360c3);
+    background: linear-gradient(to right, #2ebf91, #8360c3);
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+.container {
+    margin: 30px auto;
+    width: 500px;
+    box-shadow: 0 1px 3px rgba(0,0,0, 0.3);
+    padding: 20px;
+    background-color: #fff;
+}
+
+.common-impurities{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    display: block;
+}
+
+ul{
+    list-style: none;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    box-shadow: 2px 2px 2px rgba(0,0,0, 0.3);
+}
+
+#common-equiv{
+    width: 70px;
+}
+
+.molecular-btn {
+    width: 230px;
+    margin:0;   
+}
+
+.actual-btn{
+    width: 200px;
+    margin: 19px 5px;  
+    height: 35px; 
+}
+
+.impurity-container, .actual-container{
+    display: flex;
+    justify-content: center;
+
+}
+
+
+
+.molecular-formula{
+    width:225px;
+    margin:0;
+
+}
+.actual-results{
+    width:70px;
+    margin:0 5px;
+}
+
+
+.impurity, .equivalents{
+    width: 225px;
+    margin:0 5px;
+    
+}
+
+
+
+li{
+    border: 1px solid rgba(0,0,0, 0.2);
+    margin-bottom: 5px;
+    padding: 5px;
+    box-shadow: 1px 2px 2px rgba(46, 191, 145, 0.5);
+    
+}
+
+.compound-purity{
+    display: flex;
+    justify-content: center;
+}
+
+.fas,fa-times{
+    float: right;
+}
+
+.common-btn {
+    height: 35px;
+    width: 60px;
+    background-color: rgba(131,96,195, 0.3);
+}
+
+button:focus{
+    outline: none;
+}
+
+button:active{
+    transform: scale(0.98);
+}
+
+input:focus{
+    outline: none;
+}
+
+.delete:hover{
+    color: #8360c3;
+}
+
+.impurity-btn {
+    margin: 10px 0;
+    width: 100%;
+}
+
+input{
+    border: none;
+    background-color: rgba(46, 191, 145, 0.2);
+    height:35px;
+    box-shadow: 0px 2px 2px rgba(0,0,0, 0.3);;     
+    
+}
+
+.calculate{
+    width: 220px;
+    margin: 10px 5px;  
+}
+
+.calculations{
+    display: flex;
+   
+}
