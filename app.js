@@ -62,7 +62,7 @@ const UICtrl = (function(){
            li.setAttribute("id", id);
          
            li.innerHTML = `
-                ${formula} <span>Equiv: ${equiv}</span><span class="percent-impurity"></span> <i class="fas fa-times delete"></i>
+                <div> ${formula} (${equiv} equiv.)</div><div class="id${id}"></div> <i class="fas fa-times delete"></i>
            `;
            impurityList.appendChild(li);
         },
@@ -79,8 +79,10 @@ const UICtrl = (function(){
             listItems.forEach(function(item){
                 for(const id in percentImpurities){
                     //Probably need this to just change innerTEXT to whatever. Then it won't just keep adding.
-                    if(item.id == id){                        
-                        item.appendChild(document.createTextNode(`${percentImpurities[id]}%`))
+                    if(item.id == id){   
+                        const span = document.querySelector(`.id${id}`)                     
+                        // item.appendChild(document.createTextNode(`${percentImpurities[id]}%`))
+                        span.innerText = `  ${percentImpurities[id]}%`
                     }
                 }
                 
