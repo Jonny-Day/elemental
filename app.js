@@ -121,17 +121,17 @@ const CalcCtrl = (function(){
         Dichloromethane: {
             molecWeight: 84.9326,
             chemicalFormula: [['C', 1], ['H', 2], ['Cl', 2]],
-            // formulaString:
+    
         },
         EtOAc: {
             molecWeight: 88.1051,
             chemicalFormula: [['C', 4], ['H', 8], ['O', 2]],
-            // formulaString:
+            
         },
         MeOH: {
             molecWeight: 32.0419,
             chemicalFormula: [['C', 1], ['H',4], ['O', 1]],
-            // formulaString:
+            
         },
         Ether: {
             molecWeight: 74.1216,
@@ -245,18 +245,14 @@ const CalcCtrl = (function(){
             return totalMass;
         },
         calculateCommonElementEquivalents: function(impurity, equivalents){
-            //I JUST NEED TO COPY THE REGULAR INPUT BUT ADD EQUIVALENTS TO IT!!!!!!
-            //HEY STUPID, JUST DO IT THIS WAY INSTEAD OF ALL THOSE DAMN INPUTS
 
             let commonMolecularFormulaObject = {};
+            
             const chemicalFormulaCommonArray = commonImpurities[impurity].chemicalFormula;
             chemicalFormulaCommonArray.map(function(element){
                 element[1] = element[1] * equivalents;
 
                 //If element exists, add equivalents to it
-
-                //NEED TO ADD THIS BELOW TO ITEM CONTROLLER
-
                 if(commonMolecularFormulaObject[element[0]]){
                     commonMolecularFormulaObject[element[0]] += element[1];
                 //If element does not exist, add it to object    
@@ -265,13 +261,7 @@ const CalcCtrl = (function(){
                 }
                 
             })
-            console.log(chemicalFormulaCommonArray);
-            console.log(commonMolecularFormulaObject);
-            //I NEED TO MOVE THIS SOMEWHERE ELSE (Move to App Ctrl)
-            // totalMolecularFormulaArray = Object.entries(molecularFormulaObject);
-            // console.log(totalMolecularFormulaArray);
-
-            //Need to return the molecularFormulaObject
+          
             return commonMolecularFormulaObject
 
             

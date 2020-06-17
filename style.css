@@ -19,10 +19,15 @@ body {
 
 .container {
     margin: 30px auto;
-    width: 500px;
+    width: 1000px;
     box-shadow: 0 1px 3px rgba(0,0,0, 0.3);
     padding: 20px;
     background-color: #fff;
+    display: flex;
+}
+
+.side-a, .side-b {
+    margin: 10px
 }
 
 .common-impurities{
@@ -150,4 +155,8 @@ input{
 .calculations{
     display: flex;
    
+}
+
+#percent-display{
+    margin-left: 5px;
 }
