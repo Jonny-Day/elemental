@@ -169,9 +169,9 @@ const CalcCtrl = (function(){
                 const percentN = ((chn.N / totalElementMasses) * 100).toFixed(2);
                 
                 return {
-                    percentC: percentC,
-                    percentH: percentH,
-                    percentN: percentN
+                    percentC,
+                    percentH,
+                    percentN
         }
     },
         calculateComposition: function(formula, equivalents){
@@ -287,9 +287,9 @@ const CalcCtrl = (function(){
                 const percentN = ((chn.N / totalChemicalMasses) * 100).toFixed(2);
                 
                 return {
-                    percentC: percentC,
-                    percentH: percentH,
-                    percentN: percentN
+                    percentC,
+                    percentH,
+                    percentN
             }
         }
     }
@@ -333,32 +333,32 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
     };
 
     const getMolecularFormulaMassAndComposition = function(event){
+        //Get molecular formula from input
         const molecularFormula = molecFormInput.value;
         
         if(molecularFormula !== ""){
+            //Add formula to the UI
             UICtrl.addMolecularFormulaToUI(molecularFormula);
-            const compositionResults = CalcCtrl.calculateComposition(molecularFormula);
-            const CHNresults = CalcCtrl.calculateCHN(compositionResults.formulaArr, compositionResults.totalMass)            
-            UICtrl.addExpectedCHN(CHNresults.percentC, CHNresults.percentH, CHNresults.percentN);
-           
-            const formulaArr = compositionResults.formulaArr
-            //Move all the array stuff to molecular formula object;
+            //Calculate the composition and then use destructuring to get formula array and total mass
+            const { formulaArr, totalMass } = CalcCtrl.calculateComposition(molecularFormula);
+            //Calculate CHN results from the composition results
+            const { percentC, percentH, percentN } = CalcCtrl.calculateCHN(formulaArr, totalMass)
+            //Add the CHN results to the UI            
+            UICtrl.addExpectedCHN(percentC, percentH, percentN);
 
+            //Move all the array stuff to molecular formula object
             const molecularFormulaObject = {};
             formulaArr.forEach(function(element){
-                //creating each property of the object
-                //NEED TO ADD THIS BELOW TO ITEM CONTROLLER
-                
+                //creating each property of the object                
                 molecularFormulaObject[element[0]] = element[1];
             });
             //Generate random ID for object
-            //Might not need this below for the main compound
             molecularFormulaObject['id'] = (Math.floor(Math.random() * 10000000))
-            molecularFormulaObject['mass'] = compositionResults.totalMass;
-            //Add total mass to item controller
+            //Add mass to object
+            molecularFormulaObject['mass'] = totalMass
+            //Add object to item controller
             ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject)
-            // ItemCtrl.addMassItem(compositionResults.totalMass);
-             
+            //Clear the input 
             molecFormInput.value = "";   
         }
         event.preventDefault();
@@ -396,13 +396,11 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             impurityFormInput.value = "";
             equivalentsFormInput.value = "";
             //Calculate the composition and return an object with the results
-            const compositionResults = CalcCtrl.calculateComposition(formula, equivalents);
-            const massOfImpurity = compositionResults.totalMass
-            //Get an array of arrays
-            const formulaArr = compositionResults.formulaArr
+            const { formulaArr, totalMass } = CalcCtrl.calculateComposition(formula, equivalents);
+            const massOfImpurity = totalMass            
             //create empty object
             const molecularFormulaObject = {};
-            //convert array of arrays into molecular formula object
+            //convert formula array of arrays into molecular formula object
             formulaArr.forEach(function(element){              
                 molecularFormulaObject[element[0]] = element[1];
             });
@@ -501,9 +499,9 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                   return Object.entries(merged)  
                 }
             //Calculate final CHN    
-            const results = CalcCtrl.calculateFinalCHN(combinedFormulaArr, totalMass);
+            const {percentC, percentH, percentN} = CalcCtrl.calculateFinalCHN(combinedFormulaArr, totalMass);
             //Add CHN to UI
-            UICtrl.addExpectedCHN(results.percentC, results.percentH, results.percentN);
+            UICtrl.addExpectedCHN(percentC, percentH, percentN);
 
             event.preventDefault();
         }
