@@ -24,7 +24,8 @@ const silica = document.querySelector("#Silica");
 const water = document.querySelector("#Water");
 const percentBtn = document.querySelector("#calculate-purity");
 const percentDisplay = document.querySelector("#percent-display");
-const impurityPercent = document.querySelector(".percent-impurity")
+const impurityPercent = document.querySelector(".percent-impurity");
+const instructions = document.querySelector(".instructions");
 
 //UI CONTROLLER---------------------------------------------------------
 const UICtrl = (function(){
@@ -65,11 +66,13 @@ const UICtrl = (function(){
                 <div> ${formula} (${equiv} equiv.)</div><div class="id${id}"></div> <i class="fas fa-times delete"></i>
            `;
            impurityList.appendChild(li);
+           instructions.style.display = "none";
         },
         deleteListItem: function(event){
             if (event.target.classList.contains("delete")){
                 event.target.parentElement.remove();
             };
+
         },
         addPercentagePurity: function(purity, percentImpurities){
             percentDisplay.innerHTML = ` ${purity} %`
