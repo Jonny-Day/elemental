@@ -78,19 +78,27 @@ const UICtrl = (function(){
             percentDisplay.innerHTML = ` ${purity} %`
 
             const listItems = document.querySelectorAll("li")
-           //Here maybe object.hasOwnProperty('key') would be better
+        
             listItems.forEach(function(item){
                 for(const id in percentImpurities){
-                    //Probably need this to just change innerTEXT to whatever. Then it won't just keep adding.
-                    if(item.id == id){   
+                    //if the id for the item and the id for the impurity match
+                    if(item.id == id){
+                    //Select the span with the given id       
                         const span = document.querySelector(`.id${id}`)                     
-                        // item.appendChild(document.createTextNode(`${percentImpurities[id]}%`))
+                    //Insert the % impurity to the correct list item    
                         span.innerText = `  ${percentImpurities[id]}%`
                     }
                 }
                 
 
             })
+            
+        },
+        addAlert: function(alertType, alertMessage){
+            const div = document.createElement('div');
+            div.className = alertType;
+            div.innerText = alertMessage;
+
             
         }
     }
@@ -302,8 +310,7 @@ const CalcCtrl = (function(){
 const ItemCtrl = (function(){
     const molecularFormulas = [];
 
-    return {
-     
+    return {     
         getFormulas: function(){
             return molecularFormulas
         },
@@ -431,7 +438,6 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 const commonEquivalents = parseFloat(commonImpurityEquiv.value).toFixed(3);
                 //calculate mass and add to item controller
                 const massOfImpurity = CalcCtrl.calculateMassOfCommonImpurity(impurityToAdd, commonEquivalents);
-                // ItemCtrl.addMassItem(massOfImpurity);
                 
                 //calculate formula and add to item controller
                 const molecularFormulaObject = CalcCtrl.calculateCommonElementEquivalents(impurityToAdd, commonEquivalents);
@@ -441,7 +447,6 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 molecularFormulaObject['mass'] = massOfImpurity;
                 //Add impurity object to item controller
                 ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject);
-
                 //add common impurity to UI    
                 UICtrl.addListItem(impurityToAdd, commonEquivalents, molecularFormulaObject['id']);
                 //clear inputs
@@ -463,7 +468,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                     formulaArr.splice(index, 1);
                 }
             });
-
+            //Remove impurity from the list
             UICtrl.deleteListItem(event)
         }
 
@@ -484,8 +489,6 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
 
             const combinedFormulaArr = merge(totalFormulas);
 
-            //merge function MAYBE THIS CAN JUST RETURN AN ARRAY NOT AN OBJECT?????????????????
-
             //totalFormula array of objects run through merge
             function merge(totalFormulas){
                 //for each of the objects
@@ -502,7 +505,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                   return Object.entries(merged)  
                 }
             //Calculate final CHN    
-            const {percentC, percentH, percentN} = CalcCtrl.calculateFinalCHN(combinedFormulaArr, totalMass);
+            const { percentC, percentH, percentN } = CalcCtrl.calculateFinalCHN(combinedFormulaArr, totalMass);
             //Add CHN to UI
             UICtrl.addExpectedCHN(percentC, percentH, percentN);
 
@@ -524,19 +527,17 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             //calculate the purity
             const purity = ((productMass/totalMass) * 100).toFixed(1)
            
-
+            //Calculate percentage of each impurity
             const percentImpurities = getPercentageImpurities(formulas, totalMass);
-            console.log(percentImpurities);
-
              //Add % purities to the UI
              UICtrl.addPercentagePurity(purity, percentImpurities);
         }
 
         const getPercentageImpurities = function(formulas, totalMass){
+            //Create empty object for the impurities
             const percentageImpurities = {}
-            
-            formulas.forEach(function(item){
-                
+            //loop through each formula and add key: value pairs of the id's and their respective % purities.
+            formulas.forEach(function(item){       
                 percentageImpurities[item.id] = ((item.mass/totalMass) *100).toFixed(1);
             })
 
@@ -545,6 +546,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
 
 //Public Methods   
 return {
+    //Add the event listeners when app started
     init: function(){
         loadEventListeners();
     }
