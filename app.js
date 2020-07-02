@@ -4,6 +4,7 @@ const actual = document.querySelector(".actual");
 const impurityList = document.querySelector("#impurity-list");
 const molecForm = document.querySelector("#molecular-form");
 const molecFormInput = document.querySelector("#molecular-formula");
+const molecularFormDiv = document.querySelector(".molecular-formula");
 const molecBtn = document.querySelector("#molecular-btn");
 const formulaDisplay = document.querySelector("#formula");
 const impurityForm = document.querySelector("#impurity-form");
@@ -26,6 +27,8 @@ const percentBtn = document.querySelector("#calculate-purity");
 const percentDisplay = document.querySelector("#percent-display");
 const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
+const sideb = document.querySelector(".side-b");
+
 
 //UI CONTROLLER---------------------------------------------------------
 const UICtrl = (function(){
@@ -76,7 +79,7 @@ const UICtrl = (function(){
         },
         addPercentagePurity: function(purity, percentImpurities){
             percentDisplay.innerHTML = ` ${purity} %`
-
+            
             const listItems = document.querySelectorAll("li")
         
             listItems.forEach(function(item){
@@ -98,8 +101,11 @@ const UICtrl = (function(){
             const div = document.createElement('div');
             div.className = alertType;
             div.innerText = alertMessage;
+            sideb.insertBefore(div, sideb.firstChild)
 
-            
+            setTimeout(function(){
+                document.querySelector(`.${alertType}`).remove()
+            }, 2500);
         }
     }
 })();
@@ -278,8 +284,7 @@ const CalcCtrl = (function(){
             
         },
         calculateFinalCHN: function(totalMolecularFormulaArray, totalChemicalMasses){
-            const chn = {}
-            // const totalMolecularFormulaArray = ItemCtrl.getMassesOfMixture()
+            const chn = {};
             totalMolecularFormulaArray.forEach(function(item){
                 const element = item[0]
                 const equivalents = item[1]
@@ -329,7 +334,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
     //EVENT LISTENERS
     const loadEventListeners = function(){
         molecForm.addEventListener("submit", getMolecularFormulaMassAndComposition);
-        impurityForm.addEventListener("click", getImpurityValues);
+        impurityBtn.addEventListener("click", getImpurityValues);
         actualForm.addEventListener("submit", getActualResults);
         impurityList.addEventListener("click", deleteItem);
         dcm.addEventListener("click", getCommonImpurity);
@@ -369,7 +374,10 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             //Add object to item controller
             ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject)
             //Clear the input 
-            molecFormInput.value = "";   
+            molecFormInput.value = "";
+            UICtrl.addAlert('success', 'Compound successfully added')   
+        } else {
+            UICtrl.addAlert('warning', 'Please add molecular formula of compound')
         }
         event.preventDefault();
     };
@@ -391,6 +399,9 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         actualFormInputC.disabled = true;
         actualFormInputH.disabled = true;
         actualFormInputN.disabled = true;
+        UICtrl.addAlert('success', 'CHN results successfully added')  
+        } else {
+            UICtrl.addAlert('warning', 'Please fill out all three actual results fields or enter 0 if not present in compound')
         }
         
     
@@ -421,10 +432,10 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             //Update the UI 
             UICtrl.addListItem(formula, equivalents, molecularFormulaObject['id'])
             //Add the final object to the item controller
-            ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject)
-           
-                        
-            
+            ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject) 
+            UICtrl.addAlert('success', 'Impurity successfully added');
+            } else if (impurityFormInput.value === "" || equivalentsFormInput.value === ""){
+                UICtrl.addAlert('warning', 'Please give both number of equivalents and chemical formula of impurity to add')
             }
             
             event.preventDefault();
@@ -451,7 +462,10 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 UICtrl.addListItem(impurityToAdd, commonEquivalents, molecularFormulaObject['id']);
                 //clear inputs
                 commonImpurityEquiv.value = "";
-            } 
+                UICtrl.addAlert('success', 'Impurity successfully added');
+            } else {
+                UICtrl.addAlert('warning', 'Please enter the number of equivalents of the common impurity')
+            }
            
             event.preventDefault();
         }
@@ -470,6 +484,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             });
             //Remove impurity from the list
             UICtrl.deleteListItem(event)
+            UICtrl.addAlert('success', 'Impurity successfully deleted');
         }
 
         const finalCHN = function(event){
@@ -546,7 +561,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
 
 //Public Methods   
 return {
-    //Add the event listeners when app started
+    //Add the event listeners when app is started
     init: function(){
         loadEventListeners();
     }
