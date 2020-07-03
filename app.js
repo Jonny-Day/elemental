@@ -1,6 +1,7 @@
 const compoundPurity = document.querySelector(".compound-purity");
 const expected = document.querySelector(".expected");
 const actual = document.querySelector(".actual");
+const actualBtn = document.querySelector("#actual-btn");
 const impurityList = document.querySelector("#impurity-list");
 const molecForm = document.querySelector("#molecular-form");
 const molecFormInput = document.querySelector("#molecular-formula");
@@ -38,7 +39,8 @@ const UICtrl = (function(){
         addMolecularFormulaToUI: function(formula){
             formula = formula.replace(/\s/g, "");
             formulaDisplay.innerText = ` = (${formula})`;
-            molecFormInput.disabled = true;
+            molecForm.disabled = true;
+            molecBtn.disabled = true;
         },
         addExpectedCHN: function(c, h, n){
             if(isNaN(c)){
@@ -57,7 +59,9 @@ const UICtrl = (function(){
         addActualCHN: function(c, h, n){
             actual.innerHTML = `
             <strong>C: </strong>${c} % <strong>H: </strong>${h} % <strong>N: </strong>${n} %
-            `
+            `;
+            actualForm.disabled = true;
+            actualBtn.disabled = true;
         },
         addListItem: function(formula, equiv, id){
            const li = document.createElement("li");
@@ -98,14 +102,17 @@ const UICtrl = (function(){
             
         },
         addAlert: function(alertType, alertMessage){
-            const div = document.createElement('div');
-            div.className = alertType;
-            div.innerText = alertMessage;
-            sideb.insertBefore(div, sideb.firstChild)
+            if(!document.querySelector(".alert")){
+                const div = document.createElement('div');
+                div.className = `${alertType} alert`;
+                div.innerText = alertMessage
+                sideb.insertBefore(div, sideb.firstChild)
 
-            setTimeout(function(){
-                document.querySelector(`.${alertType}`).remove()
-            }, 2500);
+                setTimeout(function(){
+                    document.querySelector(`.${alertType}`).remove()
+                    }, 2500);
+            } 
+            
         }
     }
 })();
@@ -432,10 +439,11 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             //Update the UI 
             UICtrl.addListItem(formula, equivalents, molecularFormulaObject['id'])
             //Add the final object to the item controller
-            ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject) 
+            ItemCtrl.addToMolecularFormulaArray(molecularFormulaObject)
+           
             UICtrl.addAlert('success', 'Impurity successfully added');
-            } else if (impurityFormInput.value === "" || equivalentsFormInput.value === ""){
-                UICtrl.addAlert('warning', 'Please give both number of equivalents and chemical formula of impurity to add')
+            } else {
+                UICtrl.addAlert('warning', 'Please enter number of equivalents and chemical formula')
             }
             
             event.preventDefault();
@@ -464,7 +472,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 commonImpurityEquiv.value = "";
                 UICtrl.addAlert('success', 'Impurity successfully added');
             } else {
-                UICtrl.addAlert('warning', 'Please enter the number of equivalents of the common impurity')
+                UICtrl.addAlert('warning', 'Please enter the number of equivalents')
             }
            
             event.preventDefault();

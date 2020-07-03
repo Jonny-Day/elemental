@@ -18,6 +18,19 @@ body {
     overflow: hidden;
 }
 
+.alert{
+    color: #fff;
+    padding: 5px;
+}
+
+.success{
+    background-color: rgba(35, 196, 92, 0.7);
+}
+
+.warning{
+    background-color: rgba(245, 10, 10, 0.8);
+}
+
 .container {
     margin: 30px auto;
     width: 1000px;
@@ -85,13 +98,11 @@ button{
 
 }
 
-
-
 .molecular-formula{
     width:225px;
     margin:0;
-
 }
+
 .actual-results{
     width:70px;
     margin:0 5px;
