@@ -1,1 +1,1 @@
-# An extensive elemental purity calculator with storage and edit functionality
+# A simple but extensive elemental purity calculator with storage and edit functionality
