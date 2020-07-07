@@ -6,9 +6,14 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Elemental Calculator - Home' });
 });
 
+/* GET about page. */
+router.get('/about', (req, res, next) => {
+  res.render('about');
+});
+
 /* GET register page. */
 router.get('/register', (req, res, next) => {
-  res.send('GET /register')
+  res.render('register')
 });
 
 /* POST register user */
@@ -41,6 +46,28 @@ router.put('/profile/:user_id', (req, res, next) => {
 router.post('/logout', (req, res, next) => {
   res.send('POST /logout')
 });
+
+/* GET forgot password page */
+router.get('/forgot', (req, res, next) => {
+  res.send('GET /forgot')
+});
+
+/* PUT forgot password page */
+router.put('/forgot', (req, res, next) => {
+  res.send('PUT /forgot')
+});
+
+/* GET reset password page */
+router.get('/reset/:token', (req, res, next) => {
+  res.send('GET /reset')
+});
+
+/* PUT reset password page */
+router.put('/reset/:token', (req, res, next) => {
+  res.send('PUT /reset')
+});
+
+
 
 
 
