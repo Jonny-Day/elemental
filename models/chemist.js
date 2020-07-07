@@ -6,7 +6,7 @@ const ChemistSchema = new Schema({
     name: String,
     location: String,
     department: String,
-    email: String
+    email: String,
 });
 
 ChemistSchema.plugin(passportLocalMongoose);
