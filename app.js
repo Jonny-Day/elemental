@@ -9,9 +9,12 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const calculatorRouter = require('./routes/calculator');
 const calcResults = require('./routes/results');
+const session = require('express-session');
 
 //Models
 const Chemist = require('./models/chemist')
+
+
 
 const app = express();
 
@@ -35,6 +38,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//Configure passport and sessions (sessions comes first)
+
+app.use(session({
+  secret: 'meow said the cat',
+  resave: false,
+  saveUninitialized: true,
+}))
+
+passport.use(Chemist.createStrategy());
+ 
+passport.serializeUser(Chemist.serializeUser());
+passport.deserializeUser(Chemist.deserializeUser());
 
 //Mount the routes
 app.use('/', indexRouter);
