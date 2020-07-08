@@ -1,0 +1,7 @@
+ <%# FLASH MESSAGES %>
+ <% if(success && success.length) { %>
+    <h3 style="color: green;"> <%= success %> </h3>
+  <% } %>
+  <% if(error && error.length) { %>
+    <h3 style="color: red;"><%= error %> </h3>
+  <% } %>
