@@ -3,7 +3,7 @@ const passport = require('passport')
 
 module.exports = {
 
-    
+    //Post /register
     async postRegister(req, res, next){
 
     const newChemist = new Chemist ({
@@ -18,12 +18,14 @@ module.exports = {
             res.redirect("/");
     });
     },
+    // POST /login
     postLogin(req, res, next){
         passport.authenticate('local', {
             successRedirect: "/",
             failureRedirect: "/login"
           })(req, res, next)
     },
+    //GET /logout
     getLogout(req, res, next){
         req.logout();
         res.redirect("/");

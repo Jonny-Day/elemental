@@ -11,12 +11,12 @@ router.get('/', (req, res, next) => {
 
 /* GET about page. */
 router.get('/about', (req, res, next) => {
-  res.render('about');
+  res.render('about', {title: 'About'});
 });
 
 /* GET register page. */
 router.get('/register', (req, res, next) => {
-  res.render('register')
+  res.render('register', {title: 'Register'})
 });
 
 /* POST register user */
