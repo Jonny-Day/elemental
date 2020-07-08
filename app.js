@@ -48,6 +48,9 @@ app.use(session({
 }))
 
 passport.use(Chemist.createStrategy());
+
+app.use(passport.initialize());
+app.use(passport.session());
  
 passport.serializeUser(Chemist.serializeUser());
 passport.deserializeUser(Chemist.deserializeUser());

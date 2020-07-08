@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { postRegister } = require('../controllers/index')
+const { postRegister } = require('../controllers/index');
+const { errorHandler } = require('../middleware/index');
+const passport = require('passport');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -18,7 +20,7 @@ router.get('/register', (req, res, next) => {
 });
 
 /* POST register user */
-router.post('/register', postRegister);
+router.post('/register', errorHandler(postRegister));
 
 /* GET login page */
 router.get('/login', (req, res, next) => {
@@ -26,9 +28,10 @@ router.get('/login', (req, res, next) => {
 });
 
 /* POST login  */
-router.post('/login', (req, res, next) => {
-  res.send('POST /login')
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: "/",
+  failureRedirect: "/login"
+}));
 
 /* GET profile page */
 //EDIT FORM IS GOING TO GO IN HERE TOO
@@ -41,9 +44,10 @@ router.put('/profile/:user_id', (req, res, next) => {
   res.send('PUT /profile/:user_id')
 });
 
-/* POST logout  */
-router.post('/logout', (req, res, next) => {
-  res.send('POST /logout')
+/* GET logout  */
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect("/");
 });
 
 /* GET forgot password page */
