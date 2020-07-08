@@ -1,19 +1,19 @@
 <%- include('partials/header.ejs') %>
 
 <h1>Register</h1>
-<form action="">
-    <label for="chemist[username]">Username</label>
-    <input type="text" name='chemist[username]' placeholder="Username">
-    <label for="chemist[location]">Location</label>
-    <input type="text" name='chemist[location]' placeholder="Location">
-    <label for="chemist[department]">Department</label>
-    <input type="text" name='chemist[department]' placeholder="Department">
-    <label for="chemist[email]">Email</label>
-    <input type="text" name='chemist[email]' placeholder="Email">
-    <label for="chemist[password]">Password</label>
-    <input type="text" name='chemist[password]' placeholder="Password">
+<form action="/register" method="POST">
+    <label for="username">Username</label>
+    <input type="text" id="username" name='username' placeholder="Username">
+    <label for="location">Location</label>
+    <input type="text" id="location" name='location' placeholder="Location">
+    <label for="department">Department</label>
+    <input type="text" id="department" name='department' placeholder="Department">
+    <label for="email">Email</label>
+    <input type="text" id="email" name='email' placeholder="Email">
+    <label for="password">Password</label>
+    <input type="text" id="password" name='password' placeholder="Password">
     <label for="password-confirm">Confirm Password</label>
-    <input type="text" name="password-confirm" placeholder="Password">
+    <input type="text" id="password-confirm" placeholder="Password">
     <button>Submit</button>
 </form>
     

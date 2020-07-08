@@ -3,7 +3,11 @@ const passport = require('passport')
 
 module.exports = {
 
-    //Post /register
+    //GET /register
+    getRegister(req, res, next){
+        res.render('register', {title: 'Register'})
+    },
+    //POST /register
     async postRegister(req, res, next){
 
     const newChemist = new Chemist ({
@@ -13,10 +17,17 @@ module.exports = {
         email: req.body.email 
         });
    
-        await Chemist.register(newChemist, req.body.password);
-        passport.authenticate("local")(req, res, function(){
+        let chemist = await Chemist.register(newChemist, req.body.password);
+        
+        req.login(chemist, function(err){
+            if(err) return next(err);
+            req.session.success = `Welcome, ${chemist.username}`;
             res.redirect("/");
-    });
+        })        
+       
+    },
+    getLogin(req, res, next){
+        res.render('login', {title: 'Login'})
     },
     // POST /login
     postLogin(req, res, next){

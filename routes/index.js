@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { postRegister, postLogin, getLogout } = require('../controllers/index');
-const { errorHandler } = require('../middleware/index');
+const { getRegister, postRegister, getLogin, postLogin, getLogout } = require('../controllers/index');
+const { asyncErrorHandler } = require('../middleware/index');
 const passport = require('passport');
 
 /* GET home page. */
@@ -15,17 +15,13 @@ router.get('/about', (req, res, next) => {
 });
 
 /* GET register page. */
-router.get('/register', (req, res, next) => {
-  res.render('register', {title: 'Register'})
-});
+router.get('/register', getRegister);
 
 /* POST register user */
-router.post('/register', errorHandler(postRegister));
+router.post('/register', asyncErrorHandler(postRegister));
 
 /* GET login page */
-router.get('/login', (req, res, next) => {
-  res.send('GET /login')
-});
+router.get('/login', getLogin);
 
 /* POST login  */
 router.post('/login', postLogin);
