@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { postRegister } = require('../controllers/index');
+const { postRegister, postLogin, getLogout } = require('../controllers/index');
 const { errorHandler } = require('../middleware/index');
 const passport = require('passport');
 
@@ -28,10 +28,7 @@ router.get('/login', (req, res, next) => {
 });
 
 /* POST login  */
-router.post('/login', passport.authenticate('local', {
-  successRedirect: "/",
-  failureRedirect: "/login"
-}));
+router.post('/login', postLogin);
 
 /* GET profile page */
 //EDIT FORM IS GOING TO GO IN HERE TOO
@@ -45,10 +42,7 @@ router.put('/profile/:user_id', (req, res, next) => {
 });
 
 /* GET logout  */
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect("/");
-});
+router.get('/logout', getLogout);
 
 /* GET forgot password page */
 router.get('/forgot', (req, res, next) => {
