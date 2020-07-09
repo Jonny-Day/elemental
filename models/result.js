@@ -8,12 +8,12 @@ const ResultSchema = new Schema({
     calculatedResult: String,
     percentagePurity: String,
     impurities: Array,
-    author: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Chemist'
-        }
-    ]
+    // author: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Chemist'
+    //     }
+    // ]
 });
 
 

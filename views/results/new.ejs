@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>New Result</h1>
+
+<form action="/results" method="POST">
+    <label for="lot-number">Lot Number</label>
+    <input type="text" id="lot-number" name="lotNumber">
+    <label for="chemical-formula">Chemical Formula</label>
+    <input type="text" id="chemical-formula" name="chemicalFormula">
+    <label for="actual-result">Actual Result</label>
+    <input type="text" id="actual-result" name="actualResult">
+    <label for="calculated-result">Calculated Result</label>
+    <input type="text" id="calculated-result" name="calculatedResult">
+    <label for="percentage-purity">Percentage Purity</label>
+    <input type="text" id="percentage-purity" name="percentagePurity">
+    <label for="impurities">impurities</label>
+    <input type="text" id="impurities" name="impurities">
+    <!-- <label for="author">Author</label>
+    <input type="text" id="author" name="author"> -->
+    <label for="notes">Notes</label>
+    <textarea name="notes" id="notes" placeholder="Additional notes"></textarea>
+    <input type="submit">
+
+</form>
+
+
+
+<%- include('../partials/footer.ejs') %>
