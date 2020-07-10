@@ -1,10 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const { asyncErrorHandler } = require('../middleware/index');
-const { getResults, newResult, createResult, showResult } = require('../controllers/results');
+const { 
+  resultsIndex,
+  newResult, 
+  createResult, 
+  showResult,
+  editResult,
+  updateResult,
+  destroyResult
+ } = require('../controllers/results');
 
 /* GET results index page /results */
-router.get('/', asyncErrorHandler(getResults));
+router.get('/', asyncErrorHandler(resultsIndex));
 
 /* GET new result page /results/new */
 router.get('/new', newResult);
@@ -16,20 +24,14 @@ router.post('/', asyncErrorHandler(createResult));
 router.get('/:id', asyncErrorHandler(showResult));
 
 /* GET EDIT result /results/:id/edit */
-router.get('/:id/edit', (req, res, next) => {
-    res.send('/results/:id/edit');
-  });
+router.get('/:id/edit', asyncErrorHandler(editResult));
 
 /* PUT UPDATE result /results/:id */
-router.put('/:id', (req, res, next) => {
-    res.send('/results/:id');
-  });
+router.put('/:id', asyncErrorHandler(updateResult));
 
 
 /* DESTROY DELETE result /results/:id */
-router.delete('/:id', (req, res, next) => {
-    res.send('/results/:id');
-  });  
+router.delete('/:id', asyncErrorHandler(destroyResult));  
 
 
 

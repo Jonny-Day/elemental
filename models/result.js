@@ -8,6 +8,7 @@ const ResultSchema = new Schema({
     calculatedResult: String,
     percentagePurity: String,
     impurities: Array,
+    notes: String,
     // author: [
     //     {
     //         type: Schema.Types.ObjectId,

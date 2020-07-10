@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const calculatorRouter = require('./routes/calculator');
 const calcResults = require('./routes/results');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 //Models
 const Chemist = require('./models/chemist')
@@ -38,6 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 //Configure passport and sessions (sessions comes first)
 
