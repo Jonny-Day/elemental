@@ -59,6 +59,11 @@ passport.deserializeUser(Chemist.deserializeUser());
 
 //set local variables middleware
 app.use(function(req, res, next){
+  req.chemist = {
+    '_id' : '5f08782f0bd2b52914e44d75',
+    'username' : 'jonny'
+  }
+  res.locals.currentUser = req.chemist;
   //Set success flash message
   res.locals.success = req.session.success || '';
   delete req.session.success;

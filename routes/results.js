@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const { asyncErrorHandler } = require('../middleware/index');
 const { 
   resultsIndex,
@@ -29,12 +29,7 @@ router.get('/:id/edit', asyncErrorHandler(editResult));
 /* PUT UPDATE result /results/:id */
 router.put('/:id', asyncErrorHandler(updateResult));
 
-
 /* DESTROY DELETE result /results/:id */
 router.delete('/:id', asyncErrorHandler(destroyResult));  
-
-
-
-
 
 module.exports = router;
