@@ -1,7 +1,8 @@
 const Result = require('../models/result')
 
 module.exports = {
-    //Result Index
+    //Result Index 
+    //NEED TO EDIT THIS SO ONLY THE USER CAN SEE ALL OF THE RESULTS
     async resultsIndex(req, res, next){
         let results = await Result.find({})
         res.render('./results/index', { title: 'Results', results });
@@ -13,7 +14,7 @@ module.exports = {
     //Results create
     async createResult(req, res, next){
         //Link the user to the result
-       req.body.result.author = req.chemist._id;
+       req.body.result.author = req.user._id;
 
        let result = await Result.create(req.body.result);
        
@@ -28,7 +29,6 @@ module.exports = {
             
             model: 'Chemist'
         });
-        console.log(result);
         res.render('results/show', { title: "Result", result })
     },
     //Result edit
