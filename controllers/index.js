@@ -27,18 +27,25 @@ module.exports = {
        
     },
     getLogin(req, res, next){
+        if(req.isAuthenticated()) return res.redirect('/')
         res.render('login', {title: 'Login'})
     },
     // POST /login
-    postLogin(req, res, next){
-        passport.authenticate('local', {
-            successRedirect: "/",
-            failureRedirect: "/login"
-          })(req, res, next)
+    async postLogin(req, res, next){
+        const { username, password } = req.body;
+        const {user, error} = await Chemist.authenticate()(username, password); 
+        if(!user && error) return next(error);
+        req.login(user, function(error) {
+            if (error) return next(error);
+            req.session.success = `Welcome, ${username}`;
+            const redirectUrl = req.session.redirectTo || '/';
+            delete req.session.redirectTo;
+            res.redirect(redirectUrl);
+        });
     },
     //GET /logout
-    getLogout(req, res, next){
-        req.logout();
-        res.redirect("/");
+    async getLogout(req, res, next){
+        await req.logout()
+        res.redirect('/')
     }
 }

@@ -24,7 +24,7 @@ router.post('/register', asyncErrorHandler(postRegister));
 router.get('/login', getLogin);
 
 /* POST login  */
-router.post('/login', postLogin);
+router.post('/login', asyncErrorHandler(postLogin));
 
 /* GET profile page */
 //EDIT FORM IS GOING TO GO IN HERE TOO
@@ -38,7 +38,7 @@ router.put('/profile/:user_id', (req, res, next) => {
 });
 
 /* GET logout  */
-router.get('/logout', getLogout);
+router.get('/logout', asyncErrorHandler(getLogout));
 
 /* GET forgot password page */
 router.get('/forgot', (req, res, next) => {

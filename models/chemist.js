@@ -3,10 +3,10 @@ const passportLocalMongoose = require("passport-local-mongoose")
 const Schema = mongoose.Schema;
 
 const ChemistSchema = new Schema({
-    username: String,
+    username: { type: String, unique: true, required: true },
     location: String,
     department: String,
-    email: String,
+    email: { type: String, unique: true, required: true }
 });
 
 ChemistSchema.plugin(passportLocalMongoose);

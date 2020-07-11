@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
-const { asyncErrorHandler } = require('../middleware/index');
+const { asyncErrorHandler, isLoggedIn } = require('../middleware/index');
 const { 
   resultsIndex,
   newResult, 
@@ -12,24 +12,24 @@ const {
  } = require('../controllers/results');
 
 /* GET results index page /results */
-router.get('/', asyncErrorHandler(resultsIndex));
+router.get('/', isLoggedIn, asyncErrorHandler(resultsIndex));
 
 /* GET new result page /results/new */
-router.get('/new', newResult);
+router.get('/new', isLoggedIn, newResult);
 
 /* POST CREATE result /results */
-router.post('/', asyncErrorHandler(createResult));
+router.post('/', isLoggedIn, asyncErrorHandler(createResult));
 
 /* GET show page for one result /results/:id */
-router.get('/:id', asyncErrorHandler(showResult));
+router.get('/:id', isLoggedIn, asyncErrorHandler(showResult));
 
 /* GET EDIT result /results/:id/edit */
-router.get('/:id/edit', asyncErrorHandler(editResult));
+router.get('/:id/edit', isLoggedIn, asyncErrorHandler(editResult));
 
 /* PUT UPDATE result /results/:id */
-router.put('/:id', asyncErrorHandler(updateResult));
+router.put('/:id', isLoggedIn, asyncErrorHandler(updateResult));
 
 /* DESTROY DELETE result /results/:id */
-router.delete('/:id', asyncErrorHandler(destroyResult));  
+router.delete('/:id', isLoggedIn, asyncErrorHandler(destroyResult));  
 
 module.exports = router;

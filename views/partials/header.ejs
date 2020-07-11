@@ -24,7 +24,7 @@
           <a class="nav-link" href="../about">About</a>
         </li>
         <%# THIS NEEDS TO CHANGE TO CURRENT USER, ONCE IT IS SET UP PROPERLY %>
-        <% if(false) {%>
+        <% if(!currentUser) { %>
         <li class="nav-item">
           <a class="nav-link" href="../login">Login</a>
         </li>
@@ -36,7 +36,7 @@
           <a class="nav-link" href="../results">Results</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../login">Logout</a>
+          <a class="nav-link" href="../logout">Logout</a>
         </li>
         
       <% } %>  
