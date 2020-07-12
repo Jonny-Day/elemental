@@ -3,13 +3,13 @@
 <h1>Register</h1>
 <form action="/register" method="POST">
     <label for="username">Username</label>
-    <input type="text" id="username" name='username' placeholder="Username">
+    <input type="text" id="username" name='username' placeholder="Username" value="<%= username %>">
     <label for="location">Location</label>
-    <input type="text" id="location" name='location' placeholder="Location">
+    <input type="text" id="location" name='location' placeholder="Location" value="<%= location %>">
     <label for="department">Department</label>
-    <input type="text" id="department" name='department' placeholder="Department">
+    <input type="text" id="department" name='department' placeholder="Department" value="<%= department %>">
     <label for="email">Email</label>
-    <input type="text" id="email" name='email' placeholder="Email">
+    <input type="text" id="email" name='email' placeholder="Email" value="<%= location %>">
     <label for="password">Password</label>
     <input type="password" id="password" name='password' placeholder="Password">
     <label for="password-confirm">Confirm Password</label>
