@@ -21,15 +21,15 @@ router.get('/new', isLoggedIn, newResult);
 router.post('/', isLoggedIn, asyncErrorHandler(createResult));
 
 /* GET show page for one result /results/:id */
-router.get('/:id', isLoggedIn, isAuthor, asyncErrorHandler(showResult));
+router.get('/:id', isLoggedIn, asyncErrorHandler(isAuthor), asyncErrorHandler(showResult));
 
 /* GET EDIT result /results/:id/edit */
-router.get('/:id/edit', isLoggedIn, isAuthor, asyncErrorHandler(editResult));
+router.get('/:id/edit', isLoggedIn, asyncErrorHandler(isAuthor), asyncErrorHandler(editResult));
 
 /* PUT UPDATE result /results/:id */
-router.put('/:id', isLoggedIn, isAuthor, asyncErrorHandler(updateResult));
+router.put('/:id', isLoggedIn, asyncErrorHandler(isAuthor), asyncErrorHandler(updateResult));
 
 /* DESTROY DELETE result /results/:id */
-router.delete('/:id', isLoggedIn, isAuthor, asyncErrorHandler(destroyResult));  
+router.delete('/:id', isLoggedIn, asyncErrorHandler(isAuthor), asyncErrorHandler(destroyResult));  
 
 module.exports = router;

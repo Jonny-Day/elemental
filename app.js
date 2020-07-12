@@ -11,6 +11,7 @@ const calculatorRouter = require('./routes/calculator');
 const calcResults = require('./routes/results');
 const session = require('express-session');
 const methodOverride = require('method-override');
+const favicon = require('serve-favicon');
 
 //Models
 const Chemist = require('./models/chemist')
@@ -32,6 +33,7 @@ db.once('open', function() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

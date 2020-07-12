@@ -9,6 +9,7 @@ module.exports = {
     },
     //POST /register
     async postRegister(req, res, next){
+    //EDIT THIS ACCORDING TO IANS COURSE (124);    
 
     const newChemist = new Chemist ({
         username: req.body.username,
