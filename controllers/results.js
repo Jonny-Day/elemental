@@ -2,9 +2,9 @@ const Result = require('../models/result')
 
 module.exports = {
     //Result Index 
-    //NEED TO EDIT THIS SO ONLY THE USER CAN SEE ALL OF THE RESULTS
     async resultsIndex(req, res, next){
-        let results = await Result.find({})
+        const user = req.user._id
+        let results = await Result.find({author: [user]})
         res.render('./results/index', { title: 'Results', results });
     },
     //Result New
