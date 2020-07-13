@@ -1,8 +1,8 @@
 <%- include('../partials/header.ejs') %>
-<!-- need to do forEach -->
+
 <h1>Results</h1>
 
-<% results.forEach(function(result){ %>
+<% results.docs.forEach(function(result){ %>
 <div>
     <ul>
         <li>Lot Number: <%= result.lotNumber %></li>
@@ -11,13 +11,26 @@
         <li>Calculated Result: <%= result.calculatedResult %></li>
         <li>Percentage Purity: <%= result.percentagePurity %></li>
         <li>Impurities: <%= result.impurities %></li>
-        <!-- <li>Author: <%= %></li> -->
         <div><a class="button" href="/results/<%= result.id %>">View</a></div>
     </ul>
 </div>
 
 <% }); %>
 
+
+<div style = "margin: 20px 0">
+    <% if (results.page - 1) { %>
+        <a href="/results?page=<%= results.page - 1 %>">Prev</a>
+    <% } %>
+    <% for(let i = 1; i <= results.pages; i++){ %>
+        <a href="/results?page=<%= i %>"
+            <%= i === results.page ? 'style=color:#000; ' : '' %>
+            ><%= i %></a>
+    <% } %>
+    <% if (results.page + 1 <= results.pages) { %>
+        <a href="/results?page=<%= results.page + 1 %>">Next</a>
+    <% } %>
+</div>
 
 
 

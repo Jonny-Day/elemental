@@ -12,7 +12,9 @@ const calcResults = require('./routes/results');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const favicon = require('serve-favicon');
-
+//Seed data
+// const seedResults = require('./seeds')
+// seedResults();
 //Models
 const Chemist = require('./models/chemist')
 
@@ -61,11 +63,13 @@ passport.deserializeUser(Chemist.deserializeUser());
 
 //set local variables middleware
 app.use(function(req, res, next){
-  // req.chemist = {
-  //   '_id' : '5f08782f0bd2b52914e44d75',
-  //   'username' : 'jonny'
-  // }
-  res.locals.currentUser = req.user
+  //NEED TO COMMENT OUT ONCE OPERATIONAL
+  req.chemist = {
+    '_id' : '5f08782f0bd2b52914e44d75',
+    'username' : 'jonny'
+  }
+  res.locals.currentUser = req.chemist;
+  // res.locals.currentUser = req.user
   //Set success flash message
   res.locals.success = req.session.success || '';
   delete req.session.success;

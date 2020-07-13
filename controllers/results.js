@@ -4,7 +4,11 @@ module.exports = {
     //Result Index 
     async resultsIndex(req, res, next){
         const user = req.user._id
-        let results = await Result.find({author: [user]})
+        let results = await Result.paginate({author: [user]}, {
+            page: req.query.page || 1,
+            limit: 5
+        })
+        results.page = Number(results.page)
         res.render('./results/index', { title: 'Results', results });
     },
     //Result New

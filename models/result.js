@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const mongoosePaginate = require('mongoose-paginate')
 
 const ResultSchema = new Schema({
     lotNumber: String,
@@ -16,6 +17,8 @@ const ResultSchema = new Schema({
         }
     ]
 });
+
+ResultSchema.plugin(mongoosePaginate);
 
 
 module.exports = mongoose.model("Result", ResultSchema)
