@@ -1,9 +1,11 @@
 <%- include('../partials/header.ejs') %>
+<div class="card">
+    <h1>Results</h1>
+</div>
 
-<h1>Results</h1>
 
 <% results.docs.forEach(function(result){ %>
-<div>
+<div class="card shadow p-3 mb-5 bg-white rounded">
     <ul>
         <li>Lot Number: <%= result.lotNumber %></li>
         <li>Chemical Formula: <%= result.chemicalFormula %> </li>
@@ -18,7 +20,7 @@
 <% }); %>
 
 
-<div style = "margin: 20px 0">
+<div class="card pages" style = "margin: 20px 0">
     <% if (results.page - 1) { %>
         <a href="/results?page=<%= results.page - 1 %>">Prev</a>
     <% } %>

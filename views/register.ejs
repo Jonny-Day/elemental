@@ -1,6 +1,7 @@
 <%- include('partials/header.ejs') %>
 
-<h1>Register</h1>
+<div class="card shadow p-3 mb-5 bg-white rounded">
+    <h1>Register</h1>
 <form action="/register" method="POST">
     <label for="username">Username</label>
     <input type="text" id="username" name='username' placeholder="Username" value="<%= username %>">
@@ -14,7 +15,9 @@
     <input type="password" id="password" name='password' placeholder="Password">
     <label for="password-confirm">Confirm Password</label>
     <input type="password" id="password-confirm" placeholder="Password">
-    <button>Submit</button>
+    <button class="btn">Submit</button>
 </form>
+</div>
+
     
 <%- include('partials/footer.ejs') %>

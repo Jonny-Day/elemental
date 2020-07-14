@@ -1,7 +1,13 @@
 <%- include('partials/header.ejs') %>
-
+<div class="jumbotron shadow p-3 mb-5 bg-white rounded">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <button>Get started</button>
+    <div class="home-btns">
+        <button class="btn btn-light">Guest</button>
+        <a href="./login"><button class="btn btn-info">Login</button></a>
+    </div>
+    
+</div>
+    
 
 <%- include('partials/footer.ejs') %>

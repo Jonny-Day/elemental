@@ -1,13 +1,21 @@
 <%- include('partials/header.ejs') %>
 
-<h1>Login</h1>
+<div class="card login shadow p-3 mb-5 bg-white rounded">
+    <h1>Login</h1>
 <form action="/login" method="POST">
-    <label for="username">Username</label>
-    <input type="text" id="username" name='username' placeholder="Username">
-    <label for="password">Password</label>
-    <input type="password" id="password" name='password' placeholder="Password">
-   
-    <button>Submit</button>
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name='username' placeholder="Username">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name='password' placeholder="Password">    
+    </div>
+    <div>
+        <button class="btn btn-info">Submit</button>
+    </div>
 </form>
+</div>
+
     
 <%- include('partials/footer.ejs') %>

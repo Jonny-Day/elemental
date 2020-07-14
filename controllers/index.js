@@ -5,7 +5,7 @@ module.exports = {
 
     //GET /register
     getRegister(req, res, next){
-        res.render('register', {title: 'Register', username: '', email: '', location: '', department: ''})
+        res.render('register', {title: 'Register', username: '', email: '', location: '', department: '', style: '/stylesheets/home.css'})
     },
     //POST /register
     async postRegister(req, res, next){
@@ -38,7 +38,7 @@ module.exports = {
     },
     getLogin(req, res, next){
         if(req.isAuthenticated()) return res.redirect('/')
-        res.render('login', {title: 'Login'})
+        res.render('login', {title: 'Login', style: '/stylesheets/home.css'})
     },
     // POST /login
     async postLogin(req, res, next){

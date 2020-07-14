@@ -9,11 +9,11 @@ module.exports = {
             limit: 5
         })
         results.page = Number(results.page)
-        res.render('./results/index', { title: 'Results', results });
+        res.render('./results/index', { title: 'Results', results, style: '/stylesheets/home.css' });
     },
     //Result New
     newResult(req, res, next){
-        res.render('results/new', {title: 'New Result'})
+        res.render('results/new', {title: 'New Result', style: '/stylesheets/style.css'})
     },
     //Results create
     async createResult(req, res, next){
@@ -33,12 +33,12 @@ module.exports = {
             
             model: 'Chemist'
         });
-        res.render('results/show', { title: "Result", result })
+        res.render('results/show', { title: "Result", result, style: '/stylesheets/style.css' })
     },
     //Result edit
     async editResult(req, res, next){
         let result = await Result.findById(req.params.id);
-        res.render('results/edit', { title: "Result", result })
+        res.render('results/edit', { title: "Result", result, style: '/stylesheets/style.css' })
     },
     async updateResult(req, res, next){
         let result = await Result.findByIdAndUpdate(req.params.id, req.body.result);

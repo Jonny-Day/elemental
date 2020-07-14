@@ -6,12 +6,12 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Elemental Calculator - Home' });
+  res.render('index', { title: 'Elemental Calculator - Home', style: '/stylesheets/home.css' });
 });
 
 /* GET about page. */
 router.get('/about', (req, res, next) => {
-  res.render('about', {title: 'About'});
+  res.render('about', {title: 'About', style: '/stylesheets/home.css'});
 });
 
 /* GET register page. */
