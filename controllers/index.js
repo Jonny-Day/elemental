@@ -1,4 +1,5 @@
 const Chemist = require('../models/chemist')
+const Result = require('../models/result')
 const passport = require('passport')
 
 module.exports = {
@@ -57,5 +58,13 @@ module.exports = {
     async getLogout(req, res, next){
         await req.logout()
         res.redirect('/')
+    },
+
+    async getProfile(req, res, next){
+        const chemist = await Chemist.findById(req.user.id);
+        const results = await Result.find().where('author').equals(req.user.id).limit(5).exec();
+        res.render('profile', { results, chemist, title: 'Profile', style: '/stylesheets/home.css'})
+
+
     }
 }

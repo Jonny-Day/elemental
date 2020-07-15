@@ -1,7 +1,7 @@
  <%# FLASH MESSAGES %>
  <% if(success && success.length) { %>
-    <h5 style="color: green;"> <%= success %> </h3>
+    <h5 class="alert alert-info"> <%= success %> </h3>
   <% } %>
   <% if(error && error.length) { %>
-    <h5 style="color: red;"><%= error %> </h3>
+    <h5 class="alert alert-danger"><%= error %> </h3>
   <% } %>

@@ -65,12 +65,12 @@ passport.deserializeUser(Chemist.deserializeUser());
 
 //set local variables middleware
 app.use(function(req, res, next){
-  //NEED TO COMMENT OUT ONCE OPERATIONAL
-  req.chemist = {
-    '_id' : '5f08782f0bd2b52914e44d75',
-    'username' : 'jonny'
-  }
-  res.locals.currentUser = req.chemist;
+  // //NEED TO COMMENT OUT ONCE OPERATIONAL
+  // req.user = {
+  //   '_id' : '5f08782f0bd2b52914e44d75',
+  //   'username' : 'jonny'
+  // }
+  res.locals.currentUser = req.user;
   // res.locals.currentUser = req.user
   //Set success flash message
   res.locals.success = req.session.success || '';

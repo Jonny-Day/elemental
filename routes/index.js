@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getRegister, postRegister, getLogin, postLogin, getLogout } = require('../controllers/index');
-const { asyncErrorHandler } = require('../middleware/index');
+const { getRegister, postRegister, getLogin, postLogin, getLogout, getProfile } = require('../controllers/index');
+const { asyncErrorHandler, isLoggedIn } = require('../middleware/index');
 const passport = require('passport');
 
 /* GET home page. */
@@ -27,10 +27,7 @@ router.get('/login', getLogin);
 router.post('/login', asyncErrorHandler(postLogin));
 
 /* GET profile page */
-//EDIT FORM IS GOING TO GO IN HERE TOO
-router.get('/profile', (req, res, next) => {
-  res.send('GET /profile')
-});
+router.get('/profile', isLoggedIn, asyncErrorHandler(getProfile));
 
 /* PUT profile page */
 router.put('/profile/:user_id', (req, res, next) => {
