@@ -2,10 +2,13 @@
 
 body {
     font-family: "Montserrat";
-    background-image: url("/images/homebackground.jpg");
+    background-image: url("/images/homebackground.jpg"); 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    
 }
 
 a {
@@ -14,17 +17,25 @@ a {
   
 .jumbotron {
     margin-top: 150px;
+    padding: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    
+    justify-content: center;   
 }  
+
+
 
 .home-btns{
     display: flex;
     margin: 15px;
 }
+
+.edit-delete-btns{
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+}   
 
 .card {
     margin-top: 50px;
@@ -32,11 +43,35 @@ a {
 }
 
 .login {
-    width: 450px;
+    /* width: 450px; */
+   
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 125px auto;
+   
+}
+
+.edit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 125px auto;
+
+}
+
+
+.blurred{
+    color: #fff;
+    background: rgba(0,0,0,0.1);
+    backdrop-filter: blur(7px);
+}
+    
+
+.loginregister-btn {
+    width: 100%;
 }
 
 .card.pages {
@@ -46,3 +81,5 @@ a {
     padding: 15px;
     text-align: center;
 }
+
+

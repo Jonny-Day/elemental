@@ -1,21 +1,32 @@
 <%- include('partials/header.ejs') %>
 
-<div class="card login shadow p-3 mb-5 bg-white rounded">
-    <h1>Login</h1>
-<form action="/login" method="POST">
-    <div>
-        <label for="username">Username</label>
-        <input type="text" id="username" name='username' placeholder="Username">
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3 mx-auto">
+            <div class="card login shadow p-5 mb-5 blurred rounded">
+                    <h1>Login</h1>
+                   
+                        <form action="/login" method="POST">
+                            <div class= "form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name='username' placeholder="Username">
+                            </div>
+                            <div class= "form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name='password' placeholder="Password">    
+                            </div>
+                            <div >
+                                <button class="btn btn-info loginregister-btn">Submit</button>
+                            </div>
+                        </form>
+                    
+                
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name='password' placeholder="Password">    
-    </div>
-    <div>
-        <button class="btn btn-info">Submit</button>
-    </div>
-</form>
 </div>
+    
+
 
     
 <%- include('partials/footer.ejs') %>

@@ -1,11 +1,11 @@
 <%- include('../partials/header.ejs') %>
-<div class="card">
+<div class="card blurred">
     <h1>Results</h1>
 </div>
 
 
 <% results.docs.forEach(function(result){ %>
-<div class="card shadow p-3 mb-5 bg-white rounded">
+<div class="card shadow p-3 mb-5 blurred rounded">
     <ul>
         <li>Lot Number: <%= result.lotNumber %></li>
         <li>Chemical Formula: <%= result.chemicalFormula %> </li>

@@ -1,23 +1,42 @@
 <%- include('partials/header.ejs') %>
 
-<div class="card shadow p-3 mb-5 bg-white rounded">
-    <h1>Register</h1>
-<form action="/register" method="POST">
-    <label for="username">Username</label>
-    <input type="text" id="username" name='username' placeholder="Username" value="<%= username %>">
-    <label for="location">Location</label>
-    <input type="text" id="location" name='location' placeholder="Location" value="<%= location %>">
-    <label for="department">Department</label>
-    <input type="text" id="department" name='department' placeholder="Department" value="<%= department %>">
-    <label for="email">Email</label>
-    <input type="text" id="email" name='email' placeholder="Email" value="<%= location %>">
-    <label for="password">Password</label>
-    <input type="password" id="password" name='password' placeholder="Password">
-    <label for="password-confirm">Confirm Password</label>
-    <input type="password" id="password-confirm" placeholder="Password">
-    <button class="btn">Submit</button>
-</form>
-</div>
 
-    
+
+<div class="container card shadow p-5 mb-5 blurred rounded register">
+        <h1>Register</h1>
+            <form action="/register" method="POST">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="form-group">
+                            <label for="username">Username*</label>
+                            <input type="text" class="form-control" id="username" name='username' placeholder="Username" value="<%= username %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" name='location' placeholder="Location" value="<%= location %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <input type="text" class="form-control" id="department" name='department' placeholder="Department" value="<%= department %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="text" class="form-control" id="email" name='email' placeholder="Email" value="<%= location %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password*</label>
+                            <input type="password" class="form-control" id="password" name='password' placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="password-confirm">Confirm Password*</label>
+                            <input type="password" class="form-control" id="password-confirm" placeholder="Password">
+                        </div> 
+                            
+                    </div>
+                </div>
+                    <button class="btn btn-info loginregister-btn">Submit</button>
+            </form>
+</div>
 <%- include('partials/footer.ejs') %>
