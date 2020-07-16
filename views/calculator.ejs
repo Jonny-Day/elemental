@@ -31,7 +31,6 @@
         <li class="nav-item">
           <a class="nav-link" href="../about">About</a>
         </li>
-        <%# THIS NEEDS TO CHANGE TO CURRENT USER, ONCE IT IS SET UP PROPERLY %>
         <% if(!currentUser) { %>
         <li class="nav-item">
           <a class="nav-link" href="../login">Login</a>
@@ -58,8 +57,8 @@
     <div class="container">
         <div class="side-a">
             <div class="results">
-                <h1>Elemental Purity Calculator</h1>
-                <h2 class="compound-purity">Percentage Purity is: <span id="percent-display">___%</span></h2>
+                <h3>Elemental Purity Calculator</h3>
+                <h4 class="compound-purity">Percentage Purity is: <span id="percent-display">___%</span></h4>
     
                 <div>Expected Results</div>
                 <p class="expected">C: H: N:</p>
@@ -90,13 +89,14 @@
         <div class="side-b">
             <div class="molecular-form">
                 <form id="molecular-form">
-                    <h4><i class="far fa-plus-square"></i> Molecular Formula<span id="formula"></span></h3>
+                    <h6><i class="far fa-plus-square"></i> Molecular Formula<span id="formula"></span></h6>
                     <input type="text" class="molecular-formula" id="molecular-formula" placeholder="Molecular Formula e.g. C4 H2 O Br">
                     <button class="molecular-btn" id="molecular-btn">Add Compound</button>
                 </form>
             </div>
+            <hr>
             <div class="actual-form-container">
-                <h4><i class="far fa-plus-square"></i> Add Results</h3>
+                <h6><i class="far fa-plus-square"></i> Add Results</h6>
                 <form id="actual-form">
                     <div class="actual-inputs">
                         <div class="actual-container">
@@ -120,7 +120,7 @@
             </div>        
             <hr>
             <div class="form impurities">
-                <h4><i class="far fa-plus-square"></i> Add An Impurity</h3>
+                <h6><i class="far fa-plus-square"></i> Add An Impurity</h6>
                 <form id="impurity-form" class="impurity-form">
                     <div class="impurity-inputs">
                         <div class="impurity-container">
@@ -141,7 +141,7 @@
             </div>
     
             <div class="common-impurities">
-                <h4 class="common"><i class="far fa-plus-square"></i> Common Impurities</h3>
+                <h6 class="common"><i class="far fa-plus-square"></i> Common Impurities</h6>
                 <form id="common-impurities">
                     <label for="common-equiv">Equivalents</label>
                     <input type="number" id="common-equiv">

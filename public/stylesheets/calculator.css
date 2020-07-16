@@ -4,8 +4,11 @@
     box-sizing: border-box;
 }
 
+
+
 body {
     font-family: "Montserrat";
+    font-size: 13px;
     background-image: url("/images/homebackground.jpg");
     background-size: cover;
     background-size: 100%;
@@ -16,6 +19,10 @@ body {
     min-height: 100vh;
     margin: 0 auto;
     overflow: hidden;
+}
+
+.nav-link{
+    font-size: 1rem;
 }
 
 .alert{
@@ -32,7 +39,7 @@ body {
 }
 
 .container {
-    margin: 30px auto;
+    margin-top: 50px;
     width: 1000px;
     box-shadow: 0 1px 3px rgba(0,0,0, 0.3);
     padding: 20px;
@@ -73,6 +80,7 @@ ul, ol{
 button{
     cursor: pointer;
     border: none;
+    height: 35px;
     padding: 10px;
     box-shadow: 2px 2px 2px rgba(0,0,0, 0.3);
 }
@@ -82,13 +90,12 @@ button{
 }
 
 .molecular-btn {
-    width: 230px;
-    margin:0;   
+    width: 230px; 
 }
 
 .actual-btn{
     width: 200px;
-    margin: 19px 5px;  
+    margin: 27px 5px;  
     height: 35px; 
 }
 
@@ -117,7 +124,7 @@ button{
 
 
 
-li {
+.list-item {
     border: 1px solid rgba(0,0,0, 0.2);
     margin-bottom: 5px;
     padding: 5px;
