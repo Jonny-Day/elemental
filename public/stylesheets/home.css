@@ -68,6 +68,16 @@ a {
     background: rgba(0,0,0,0.1);
     backdrop-filter: blur(7px);
 }
+
+.unmatched{
+    color: rgba(119, 202, 102, 0.9);
+    display: inline;
+}
+    
+.matched{
+    color: rgb(235, 65, 65);
+    display: inline;
+}
     
 
 .loginregister-btn {

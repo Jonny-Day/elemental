@@ -5,12 +5,12 @@
 <div class="container card shadow p-5 mb-5 blurred rounded register">
         <h1>Profile</h1>
         <!-- VALIDATION MESSAGES GO HERE -->
-        <div class="validation"></div>
+        
             <form action="/profile?_method=PUT" method="POST">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username">Username*</label>
                             <input type="text" class="form-control" id="username" name='username' placeholder="Username" value="<%= chemist.username %>" disabled = "true"  required>
                         </div>
                         <div class="form-group">
@@ -24,11 +24,23 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email*</label>
                             <input type="text" class="form-control" id="email" name='email' placeholder="Email" value="<%= chemist.email %>" disabled = "true" required>
-                        </div>                            
+                        </div>   
+                        <div class="form-group">
+                            <label for="current-password">Current Password*</label>
+                            <input type="password" class="form-control" id="current-password" name='current-password' placeholder="Current password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Change Password</label>
+                            <input type="password" class="form-control" id="new-password" name='new-password' placeholder="New password" >
+                        </div>                             
+                        <div class="form-group">
+                            <label for="new-password-confirm">Confirm Password <div id="validation"></div></label>
+                            <input type="password" class="form-control" id="new-password-confirm" name='new-password' placeholder="New password" >
+                        </div>                             
                     </div>
-
+                    
 
 
                 </div>
@@ -42,17 +54,21 @@
                         </form>
                         
                     </div>
-                    <div>
-                        <p>Recent results:</p>
-                        <% results.forEach(function(result) { %>
-                            <div>
-                                <a href="/results/<%= result.id %>"><%= result.lotNumber%></a>
-                            </div>
-                        <% }); %>
-                    </div>
+                   
                     
                     
                 </div>
             </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Recent results:</p>
+                <% results.forEach(function(result) { %>
+                    <div>
+                        <a href="/results/<%= result.id %>"><%= result.lotNumber%></a>
+                    </div>
+                <% }); %>
+                </div>
+            </div>
 </div>
+<script src="/javascripts/validation.js"></script>
 <%- include('partials/footer.ejs') %>
