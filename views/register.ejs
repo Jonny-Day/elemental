@@ -23,7 +23,7 @@
                     <div class="col-md-6 form-group">
                         <div class="form-group">
                             <label for="email">Email*<div class="validation" id="email-validation"></div></label>
-                            <input type="text" class="form-control" id="email" name='email' placeholder="Email" value="<%= email %>" required>
+                            <input type="email" class="form-control" id="email" name='email' placeholder="Email" value="<%= email %>" required>
                         </div>
                         <div class="form-group">
                             <label for="new-password">Password*</label>
@@ -36,7 +36,7 @@
                             
                     </div>
                 </div>
-                    <button class="btn btn-info loginregister-btn">Submit</button>
+                    <button class="btn btn-info loginregister-btn" id="submit-btn">Submit</button>
             </form>
 </div>
 <script src="/javascripts/validation.js"></script>

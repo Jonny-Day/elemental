@@ -1,4 +1,4 @@
-const form = document.querySelector("#register-form");
+const submitBtn = document.querySelector("#submit-btn");
 const newPassword = document.querySelector("#new-password")
 const confirmation = document.querySelector("#new-password-confirm")
 const UImessagePass = document.querySelector("#pass-validation");
@@ -11,26 +11,27 @@ function validatePassword(message, add, remove){
     UImessagePass.classList.remove(remove);
 }
 
-function validateEmail(email) {
+function validateEmail(email){
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
        return true
      } else {
        return false
      }
-   }
+}
 
 confirmation.addEventListener('keyup', event => {
     if(newPassword.value !== confirmation.value){
-        validatePassword('Passwords must match', 'matched', 'unmatched')
+        validatePassword('Passwords must match', 'matched', 'unmatched');
+        submitBtn.setAttribute('disabled', true);
     } else {
-        validatePasswords('Passwords match', 'unmatched', 'matched')
+        validatePassword('Passwords match', 'unmatched', 'matched');
+        submitBtn.removeAttribute('disabled');
     }
     if (confirmation.value === ''){
         UImessagePass.textContent = "";
+        submitBtn.removeAttribute('disabled');
     }    
 });
-
-
 
 email.addEventListener('keyup', event => {
     if(!validateEmail(email.value)){
