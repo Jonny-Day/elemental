@@ -71,12 +71,15 @@ a {
 
 .unmatched{
     color: rgba(119, 202, 102, 0.9);
-    display: inline;
 }
     
 .matched{
     color: rgb(235, 65, 65);
+}
+
+.validation{
     display: inline;
+    margin-left: 10px;
 }
     
 

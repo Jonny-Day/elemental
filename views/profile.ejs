@@ -11,7 +11,7 @@
                     <div class="col-md-6 form-group">
                         <div class="form-group">
                             <label for="username">Username*</label>
-                            <input type="text" class="form-control" id="username" name='username' placeholder="Username" value="<%= chemist.username %>" disabled = "true"  required>
+                            <input type="text" class="form-control" id="username" name='username' placeholder="Username" minlength="5" maxlength="15" value="<%= chemist.username %>" disabled = "true"  required>
                         </div>
                         <div class="form-group">
                             <label for="location">Location</label>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <div class="form-group">
-                            <label for="email">Email*</label>
+                            <label for="email">Email*<div class="validation" id="email-validation"></div></label>
                             <input type="text" class="form-control" id="email" name='email' placeholder="Email" value="<%= chemist.email %>" disabled = "true" required>
                         </div>   
                         <div class="form-group">
@@ -36,7 +36,7 @@
                             <input type="password" class="form-control" id="new-password" name='new-password' placeholder="New password" >
                         </div>                             
                         <div class="form-group">
-                            <label for="new-password-confirm">Confirm Password <div id="validation"></div></label>
+                            <label for="new-password-confirm">Confirm Password <div class="validation" id="pass-validation"></div></label>
                             <input type="password" class="form-control" id="new-password-confirm" name='new-password' placeholder="New password" >
                         </div>                             
                     </div>
