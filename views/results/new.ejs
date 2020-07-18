@@ -1,26 +1,43 @@
 <%- include('../partials/header.ejs') %>
-
+<div class="container card blurred">
 <h1>New Result</h1>
-
-<form action="/results" method="POST">
-    <label for="lot-number">Lot Number</label>
-    <input type="text" id="lot-number" name="result[lotNumber]">
-    <label for="chemical-formula">Chemical Formula</label>
-    <input type="text" id="chemical-formula" name="result[chemicalFormula]">
-    <label for="actual-result">Actual Result</label>
-    <input type="text" id="actual-result" name="result[actualResult]">
-    <label for="calculated-result">Calculated Result</label>
-    <input type="text" id="calculated-result" name="result[calculatedResult]">
-    <label for="percentage-purity">Percentage Purity</label>
-    <input type="text" id="percentage-purity" name="result[percentagePurity]">
-    <label for="impurities">impurities</label>
-    <input type="text" id="impurities" name="result[impurities]">
-    <label for="notes">Notes</label>
-    <textarea name="result[notes]" id="notes" placeholder="Additional notes"></textarea>
-    <input type="submit">
-
-</form>
-
-
+    <form action="/results" method="POST">  
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">    
+                        <label for="lot-number">Lot Number</label>
+                        <input class="form-control" type="text" id="lot-number" name="result[lotNumber]">
+                    </div>
+                    <div class="form-group">
+                        <label for="chemical-formula">Chemical Formula</label>
+                        <input class="form-control" type="text" id="chemical-formula" name="result[chemicalFormula]">
+                    </div>
+                    <div class="form-group">
+                        <label for="actual-result">Actual Result</label>
+                        <input class="form-control" type="text" id="actual-result" name="result[actualResult]">
+                    </div>
+                    <div class="form-group">
+                        <label for="calculated-result">Calculated Result</label>
+                        <input class="form-control" type="text" id="calculated-result" name="result[calculatedResult]">
+                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="percentage-purity">Percentage Purity</label>
+                    <input class="form-control" type="text" id="percentage-purity" name="result[percentagePurity]">
+                </div>
+                <div class="form-group">
+                    <label for="impurities">impurities</label>
+                    <input class="form-control" type="text" id="impurities" name="result[impurities]">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea class="form-control" name="result[notes]" id="notes" placeholder="Additional notes"></textarea>
+                </div>
+            </div>              
+        </div>
+                <input class="btn btn-info submit-btn" type="submit">
+        </form>
+</div>
 
 <%- include('../partials/footer.ejs') %>

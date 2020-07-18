@@ -13,7 +13,7 @@ module.exports = {
     },
     //Result New
     newResult(req, res, next){
-        res.render('results/new', {title: 'New Result', style: '/stylesheets/style.css'})
+        res.render('results/new', {title: 'New Result', style: '/stylesheets/home.css'})
     },
     //Results create
     async createResult(req, res, next){

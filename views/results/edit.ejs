@@ -1,8 +1,7 @@
 <%- include('../partials/header.ejs') %>
-<div class="container card blurred edit">
-    <h1>Edit Result</h1>
-<div>
-    <form action="/results/<%= result.id %>?_method=PUT" method="POST">
+<div class="container card blurred">
+<h1>Edit Result</h1>
+    <form action="/results/<%= result.id %>?_method=PUT" method="POST"></form>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -21,8 +20,7 @@
                     <label for="calculated-result">Calculated Result</label>
                     <input type="text" class="form-control" id="calculated-result" name="result[calculatedResult]" value="<%= result.calculatedResult %>">
                 </div>
-
-            </div>
+           </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="percentage-purity">Percentage Purity</label>
@@ -36,19 +34,12 @@
                     <label for="notes">Notes</label>
                     <textarea  class="form-control" name="result[notes]" id="notes"><%= result.notes %></textarea>
                 </div>
-                
-                
             </div>
         </div>
        
-                <input class="btn btn-info submit-btn" type="submit">   
-         
-        </div>
+        <input class="btn btn-info submit-btn" type="submit">
         
-
     </form>
-</div>
-
 </div>
 
 
