@@ -58,8 +58,13 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 125px auto;
+    margin: 70px auto;
 
+}
+
+#notes{
+    height: 124px;
+    resize: none;
 }
 
 
@@ -83,7 +88,7 @@ a {
 }
     
 
-.loginregister-btn {
+.submit-btn {
     width: 100%;
 }
 

@@ -1,26 +1,51 @@
 <%- include('../partials/header.ejs') %>
 <div class="container card blurred edit">
     <h1>Edit Result</h1>
-<div class="form-group">
+<div>
     <form action="/results/<%= result.id %>?_method=PUT" method="POST">
-        <label for="lot-number">Lot Number</label>
-        <input type="text" class="form-control" id="lot-number" name="result[lotNumber]" value="<%= result.lotNumber  %>">
-        <label for="chemical-formula">Chemical Formula</label>
-        <input type="text" class="form-control" id="chemical-formula" name="result[chemicalFormula]" value="<%= result.chemicalFormula %>">
-        <label for="actual-result">Actual Result</label>
-        <input type="text" class="form-control" id="actual-result" name="result[actualResult]" value="<%= result.actualResult %>">
-        <label for="calculated-result">Calculated Result</label>
-        <input type="text" class="form-control" id="calculated-result" name="result[calculatedResult]" value="<%= result.calculatedResult %>">
-        <label for="percentage-purity">Percentage Purity</label>
-        <input type="text" class="form-control" id="percentage-purity" name="result[percentagePurity]" value="<%= result.percentagePurity %>">
-        <label for="impurities">impurities</label>
-        <input type="text" class="form-control" id="impurities" name="result[impurities]" value="<%= result.impurities %>">
-        <!-- <label for="author">Author</label>
-        <input type="text" id="author" name="author"> -->
-        <label for="notes">Notes</label>
-        <textarea class="form-control" name="result[notes]" id="notes"><%= result.notes %></textarea>
-        <input class="btn btn-info"type="submit">
-    
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="lot-number">Lot Number</label>
+                    <input type="text" class="form-control" id="lot-number" name="result[lotNumber]" value="<%= result.lotNumber  %>">
+                </div>   
+                <div class="form-group">
+                    <label for="chemical-formula">Chemical Formula</label>
+                    <input type="text" class="form-control" id="chemical-formula" name="result[chemicalFormula]" value="<%= result.chemicalFormula %>">
+                </div>
+                <div class="form-group">
+                    <label for="actual-result">Actual Result</label>
+                    <input type="text" class="form-control" id="actual-result" name="result[actualResult]" value="<%= result.actualResult %>">
+                </div>
+                <div class="form-group">
+                    <label for="calculated-result">Calculated Result</label>
+                    <input type="text" class="form-control" id="calculated-result" name="result[calculatedResult]" value="<%= result.calculatedResult %>">
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="percentage-purity">Percentage Purity</label>
+                    <input type="text" class="form-control" id="percentage-purity" name="result[percentagePurity]" value="<%= result.percentagePurity %>">
+                </div>
+                <div class="form-group">
+                    <label for="impurities">impurities</label>
+                    <input type="text" class="form-control" id="impurities" name="result[impurities]" value="<%= result.impurities %>">
+                </div>    
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea  class="form-control" name="result[notes]" id="notes"><%= result.notes %></textarea>
+                </div>
+                
+                
+            </div>
+        </div>
+       
+                <input class="btn btn-info submit-btn" type="submit">   
+         
+        </div>
+        
+
     </form>
 </div>
 
