@@ -14,6 +14,7 @@ const favicon = require('serve-favicon');
 //Seed data
 // const seedResults = require('./seeds')
 // seedResults();
+
 //Models
 const Chemist = require('./models/chemist')
 

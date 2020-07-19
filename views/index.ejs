@@ -1,7 +1,11 @@
 <%- include('partials/header.ejs') %>
 <div class="jumbotron shadow p-5 mx-5 blurred rounded">
     <h1><%= title %></h1>
-    <p>Welcome to Elemental Calculator, <%= `${currentUser.username}!` %></p>
+    <p>Welcome to Elemental Calculator 
+        <% if(currentUser) { %>
+        <%= `, ${currentUser.username}!` %>
+        <% } %>
+    </p>
 
     <% if(!currentUser) { %>
         <div class="home-btns">
