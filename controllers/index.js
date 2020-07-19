@@ -1,6 +1,8 @@
-const Chemist = require('../models/chemist')
-const Result = require('../models/result')
-const passport = require('passport')
+const Chemist = require('../models/chemist');
+const Result = require('../models/result');
+const passport = require('passport');
+const util = require('util');
+
 
 module.exports = {
 
@@ -37,6 +39,8 @@ module.exports = {
     
        
     },
+
+    //GET /login
     getLogin(req, res, next){
         if(req.isAuthenticated()) return res.redirect('/')
         res.render('login', {title: 'Login', style: '/stylesheets/home.css'})
@@ -59,12 +63,22 @@ module.exports = {
         await req.logout()
         res.redirect('/')
     },
-
+    //GET /profile
     async getProfile(req, res, next){
         const chemist = await Chemist.findById(req.user.id);
         const results = await Result.find().where('author').equals(req.user.id).limit(5).exec();
         res.render('profile', { results, chemist, title: 'Profile', style: '/stylesheets/home.css'})
-
-
+    },
+    //PUT /profile
+    async updateProfile(req, res, next){
+        const { username, email } = req.body;
+        const { user } = res.locals;
+        if(username) user.username = username;
+        if(email) user.email = email;
+        await user.save();
+        const login = util.promisify(req.login.bind(req))
+        await login(user);
+        req.session.success = 'Profile successfully updated'
+        res.redirect('/profile');
     }
 }

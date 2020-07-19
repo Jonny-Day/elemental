@@ -1,4 +1,5 @@
  const Result = require('../models/result')
+ const Chemist = require('../models/chemist')
 
 module.exports = {
     asyncErrorHandler: (fn) => 
@@ -21,6 +22,7 @@ module.exports = {
         res.redirect('back');
     },
     isValidPassword: async (req, res, next) => {
+        console.log(req.body)
         const { user } = await Chemist.authenticate()(req.user.username, req.body.currentPassword);
         if(user){
             res.locals.user = user;
@@ -33,12 +35,13 @@ module.exports = {
     changePassword: async (req, res, next) => {
         const {
             newPassword,
-            passwordConfirmation
+            confirmation
         } = req.body;
-
-        if (newPassword && confirmationPassword){
+        console.log(req.body)
+        if (newPassword && confirmation){
+            console.log(res.locals)
             const { user } = res.locals;
-            if(newPassword === passwordConfirmation){
+            if(newPassword === confirmation){
                 await user.setPassword(newPassword);
                 next();
             } else {
