@@ -6,7 +6,9 @@ const ChemistSchema = new Schema({
     username: { type: String, unique: true, required: true },
     location: String,
     department: String,
-    email: { type: String, unique: true, required: true }
+    email: { type: String, unique: true, required: true },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 ChemistSchema.plugin(passportLocalMongoose);

@@ -2,6 +2,7 @@ const Chemist = require('../models/chemist');
 const Result = require('../models/result');
 const passport = require('passport');
 const util = require('util');
+const crypto = require('crypto');
 
 
 module.exports = {

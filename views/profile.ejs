@@ -19,7 +19,20 @@
                             <label for="department">Department</label>
                             <input type="text" class="form-control" id="department" name='department' placeholder="Department" value="<%= chemist.department %>" disabled = "true">
                         </div>
-                    </div>
+                        
+                        <div class="edit-delete-btns d-flex">
+                        
+                                <button class="btn btn-warning" href="">Edit</button>
+                           
+                         
+                                <form action="" method="POST">
+                                    <input type="submit" class ="btn btn-danger" value="Delete">
+                                </form>
+                           
+                    
+                        </div>
+                         
+                    </div>    
                     <div class="col-md-6 form-group">
                         <div class="form-group">
                             <label for="email">Email*<div class="validation" id="email-validation"></div></label>
@@ -42,32 +55,25 @@
 
 
                 </div>
-                <!-- <div class="edit-delete-btns">
-                    <div>
-                        <a class="btn btn-warning" href="">Edit</a>
-                    </div>
-                    <div>
-                        <form action="" method="POST">
-                            <input type="submit" class ="btn btn-danger" value="Delete">
-                        </form>
-                        
-                    </div> -->
-                   
+               
                     
                     <button type="submit" class="btn btn-info submit-btn" id="submit-btn">Submit</button>
                 </div>
                 
             </form>
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Recent results:</p>
-                <% results.forEach(function(result) { %>
-                    <div>
-                        <a href="/results/<%= result.id %>"><%= result.lotNumber%></a>
+            <div class="container card shadow blurred">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Recent results:</h2>
+                    <% results.forEach(function(result) { %>
+                        <div>
+                            <a href="/results/<%= result.id %>"><%= result.lotNumber%></a>
+                        </div>
+                    <% }); %>
                     </div>
-                <% }); %>
                 </div>
             </div>
+            
 </div>
 <script src="/javascripts/validation.js"></script>
 <%- include('partials/footer.ejs') %>

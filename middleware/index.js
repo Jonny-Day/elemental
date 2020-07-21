@@ -37,9 +37,10 @@ module.exports = {
             newPassword,
             confirmation
         } = req.body;
-        console.log(req.body)
-        if (newPassword && confirmation){
-            console.log(res.locals)
+        if(newPassword && !confirmation){
+            req.session.error = 'Missing password confirmation'
+            return res.redirect('back')
+        } else if (newPassword && confirmation){
             const { user } = res.locals;
             if(newPassword === confirmation){
                 await user.setPassword(newPassword);

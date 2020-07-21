@@ -25,42 +25,32 @@ a {
 }  
 
 
-
 .home-btns{
     display: flex;
     margin: 15px;
 }
 
 .edit-delete-btns{
-    display: flex;
-    padding: 15px;
-    justify-content: space-between;
-}   
+    justify-content: space-between;   
+}  
+
+.alert{
+    position: absolute;
+    width: 90%;
+}
 
 .card {
     margin-top: 50px;
     padding: 50px;
 }
 
-.login {
-    /* width: 450px; */
-   
-    display: flex;
-    flex-direction: column;
+.login { 
     align-items: center;
     justify-content: center;
     margin: 125px auto;
    
 }
 
-/* .edit{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 70px auto;
-
-} */
 
 #notes{
     height: 124px;
@@ -95,7 +85,6 @@ a {
 .card.pages {
     width: 200px;
     float: right;
-    display: inline-block;
     padding: 15px;
     text-align: center;
 }
