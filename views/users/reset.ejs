@@ -1,10 +1,10 @@
-<%- include('partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
 
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center">
         <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3 mx-auto">
             <div class="card login shadow p-5 mb-5 blurred rounded">
-                    <h1>Forgot Password</h1>
+                    <h1>Password Reset</h1>
                    
                         <form action="/reset/<%= token %>?_method=PUT" method="POST">
                             <div class="form-group">
@@ -19,8 +19,6 @@
                                 <button class="btn btn-info submit-btn">Submit</button>
                             </div>
                         </form>
-                    
-                
             </div>
         </div>
     </div>
@@ -29,4 +27,4 @@
 
 
 
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

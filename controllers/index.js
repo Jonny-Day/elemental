@@ -1,8 +1,11 @@
+require('dotenv').config()
 const Chemist = require('../models/chemist');
 const Result = require('../models/result');
 const passport = require('passport');
 const util = require('util');
 const crypto = require('crypto');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 module.exports = {
@@ -81,5 +84,91 @@ module.exports = {
         await login(user);
         req.session.success = 'Profile successfully updated'
         res.redirect('/profile');
-    }
+    },
+    //GET /forgot-password
+    getForgotPassword(req, res, next){
+        res.render('users/forgot', {title: 'Forgot Password', style: '/stylesheets/home.css'} )
+    },
+     //PUT /forgot-password
+    async putForgotPassword(req, res, next){
+        const token = await crypto.randomBytes(20).toString('hex');
+        const { email } = req.body;
+        const chemist = await Chemist.findOne({email: email});
+        if(!chemist){
+            req.session.error = 'No account with that email exists';
+            res.redirect('/forgot-password');
+        }
+        chemist.resetPasswordToken = token;
+        chemist.resetPasswordExpires = Date.now() + 3600000;
+        await chemist.save();
+        console.log(chemist);
+        const msg = {
+            to: email,
+            from: 'Elemental Calculator Admin <jonathanphilipday@gmail.com>', 
+            subject: 'Elemental Calculator - Password Reset',
+            text: `Hi ${chemist.username},
+            You recently requested to reset your password for your Elemental Calculator account. 
+            Click the link below to reset it:
+            http://${req.headers.host}/reset/${token}
+            If you did not request a password reset, please ignore this email and let us know. This password reset is only valid for the next 60 minutes.`.replace(/            /g, ''),
+            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+          };
+
+        await sgMail.send(msg);  
+        req.session.success = `An email has been sent to ${email} with further instructions`
+        res.redirect('/forgot-password');
+    },
+    //GET /reset
+    async getReset(req, res, next){
+        const { token } = req.params;
+        console.log(req.params)
+        const chemist = await Chemist.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+        console.log(chemist)
+        if(!chemist){
+            req.session.error = 'Password reset token is invalid or has expired'
+            return res.redirect('/forgot-password');
+        }
+
+        res.render('users/reset', {token, title: 'Reset Password', style: '/stylesheets/home.css'} )
+    },
+    //PUT /reset
+    async putReset(req, res, next){
+        const { token } = req.params;
+        const chemist = await Chemist.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+        console.log(chemist)
+        if(!chemist){
+            req.session.error = 'Password reset token is invalid or has expired'
+            return res.redirect('/forgot-password');
+        }
+        if(req.body.newPassword === req.body.confirmation){
+            await chemist.setPassword(req.body.newPassword);
+            chemist.resetPasswordToken = null;
+            chemist.resetPasswordExpires = null;
+            await chemist.save();
+            const login = util.promisify(req.login.bind(req));
+            await login(chemist);
+        } else {
+            req.session.error = 'Passwords do not match'
+            return res.redirect(`/reset/${token}`)
+        }
+        const msg = {
+            to: chemist.email,
+            from: 'Elemental Calculator Admin <jonathanphilipday@gmail.com>', 
+            subject: 'Elemental Calculator - Password Changed',
+            text: `Hi ${chemist.username},
+            The password for your account has successfully been updated.
+            If you did not make this change, please notify us immediately.`.replace(/            /g, ''),
+            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+          };
+
+        await sgMail.send(msg);  
+        req.session.success = `Password has been successfully reset`
+        res.redirect('/');
+    },
 }

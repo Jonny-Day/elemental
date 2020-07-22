@@ -1,6 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { getRegister, postRegister, getLogin, postLogin, getLogout, getProfile, updateProfile } = require('../controllers/index');
+const { 
+  getRegister,
+  postRegister,
+  getLogin,
+  postLogin,
+  getLogout,
+  getProfile,
+  updateProfile,
+  getForgotPassword,
+  putForgotPassword,
+  getReset,
+  putReset} = require('../controllers/index');
 const { asyncErrorHandler, isLoggedIn, isValidPassword, changePassword } = require('../middleware/index');
 const passport = require('passport');
 
@@ -41,24 +52,16 @@ router.put('/profile',
 router.get('/logout', asyncErrorHandler(getLogout));
 
 /* GET forgot password page */
-router.get('/forgot', (req, res, next) => {
-  res.send('GET /forgot')
-});
+router.get('/forgot-password', getForgotPassword);
 
 /* PUT forgot password page */
-router.put('/forgot', (req, res, next) => {
-  res.send('PUT /forgot')
-});
+router.put('/forgot-password', asyncErrorHandler(putForgotPassword));
 
 /* GET reset password page */
-router.get('/reset/:token', (req, res, next) => {
-  res.send('GET /reset')
-});
+router.get('/reset/:token', asyncErrorHandler(getReset));
 
 /* PUT reset password page */
-router.put('/reset/:token', (req, res, next) => {
-  res.send('PUT /reset')
-});
+router.put('/reset/:token', asyncErrorHandler(putReset));
 
 
 
