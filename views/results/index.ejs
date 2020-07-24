@@ -1,8 +1,19 @@
 <%- include('../partials/header.ejs') %>
 <div class="card blurred">
-    <h1>Results</h1>
+    <div class="row">
+        <div class="col-6">
+            <h1>Results</h1>
+        </div>
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by Lot Number" aria-label="Search by Lot Number" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-info" type="button" id="button-addon2">Search</button>
+            </div>
+            </div>
+    </div>
 </div>
-
+</div>
 
 <% results.docs.forEach(function(result){ %>
 <div class="card shadow p-3 mb-5 blurred rounded">
@@ -24,10 +35,12 @@
     <% if (results.page - 1) { %>
         <a href="/results?page=<%= results.page - 1 %><%= queryString %>">Prev</a>
     <% } %>
+    <% if(results.pages > 1 && results.docs.length) { %>
     <% for(let i = 1; i <= results.pages; i++){ %>
         <a href="/results?page=<%= i %><%= queryString %>"
             <%= i === results.page ? 'style=color:#000; ' : '' %>
             ><%= i %></a>
+    <% } %>
     <% } %>
     <% if (results.page + 1 <= results.pages) { %>
         <a href="/results?page=<%= results.page + 1 %><%= queryString %>">Next</a>

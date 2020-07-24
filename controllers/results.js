@@ -9,7 +9,7 @@ module.exports = {
             limit: 5
         })
         results.page = Number(results.page)
-        res.render('./results/index', { title: 'Results', results, style: '/stylesheets/results.css' });
+        res.render('./results/index', { title: 'Results', results, style: '/stylesheets/results.css', queryString: '' });
     },
     //Result New
     newResult(req, res, next){
