@@ -111,7 +111,13 @@ module.exports = {
             Click the link below to reset it:
             http://${req.headers.host}/reset/${token}
             If you did not request a password reset, please ignore this email and let us know. This password reset is only valid for the next 60 minutes.`.replace(/            /g, ''),
-            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            html: `<strong>Hi ${chemist.username}</strong>,
+            <p>You recently requested to reset your password for your Elemental Calculator account.<p> 
+            <div><p>Click the link below to reset it:</p>
+            <p>http://${req.headers.host}/reset/${token}</p>
+            </div>
+            <p>If you did not request a password reset, please ignore this email and let us know by hitting reply.
+            This password reset is only valid for the next 60 minutes.</p>`
           };
 
         await sgMail.send(msg);  
@@ -163,8 +169,11 @@ module.exports = {
             subject: 'Elemental Calculator - Password Changed',
             text: `Hi ${chemist.username},
             The password for your account has successfully been updated.
-            If you did not make this change, please notify us immediately.`.replace(/            /g, ''),
-            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            If you did not make this change, please notify us immediately by hitting reply.`.replace(/            /g, ''),
+            html: `<strong>Hi ${chemist.username}</strong>,
+            <p>The password for your account has successfully been updated.</p>
+            <p>If you did not make this change, please notify us immediately by hitting reply.</p>`
+            
           };
 
         await sgMail.send(msg);  
