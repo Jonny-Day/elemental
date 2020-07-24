@@ -22,15 +22,15 @@
 
 <div class="card pages" style = "margin: 20px 0">
     <% if (results.page - 1) { %>
-        <a href="/results?page=<%= results.page - 1 %>">Prev</a>
+        <a href="/results?page=<%= results.page - 1 %><%= queryString %>">Prev</a>
     <% } %>
     <% for(let i = 1; i <= results.pages; i++){ %>
-        <a href="/results?page=<%= i %>"
+        <a href="/results?page=<%= i %><%= queryString %>"
             <%= i === results.page ? 'style=color:#000; ' : '' %>
             ><%= i %></a>
     <% } %>
     <% if (results.page + 1 <= results.pages) { %>
-        <a href="/results?page=<%= results.page + 1 %>">Next</a>
+        <a href="/results?page=<%= results.page + 1 %><%= queryString %>">Next</a>
     <% } %>
 </div>
 
