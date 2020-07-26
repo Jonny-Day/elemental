@@ -3,13 +3,16 @@ const Result = require('../models/result')
 module.exports = {
     //Result Index 
     async resultsIndex(req, res, next){
-        const user = req.user._id
-        let results = await Result.paginate({author: [user]}, {
+        // const user = req.user._id
+        //turn the thing below into dbQuery
+        // {author: [user]}
+        const dbQuery = res.locals.dbQuery
+        let results = await Result.paginate(dbQuery, {
             page: req.query.page || 1,
             limit: 5
         })
         results.page = Number(results.page)
-        res.render('./results/index', { title: 'Results', results, style: '/stylesheets/results.css', queryString: '' });
+        res.render('./results/index', { title: 'Results', results, style: '/stylesheets/results.css'});
     },
     //Result New
     newResult(req, res, next){

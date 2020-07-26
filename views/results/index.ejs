@@ -1,19 +1,24 @@
 <%- include('../partials/header.ejs') %>
-<div class="card blurred">
-    <div class="row">
-        <div class="col-6">
-            <h1>Results</h1>
+<div class="container">
+    <div class="card blurred">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Results</h1>
+            </div>
+            <div class="col-md-6">
+                <form action="/results" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Search by Lot Number" value="<%= queryString %>" aria-label="Search by Lot Number" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="col-6">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search by Lot Number" aria-label="Search by Lot Number" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-info" type="button" id="button-addon2">Search</button>
-            </div>
-            </div>
     </div>
 </div>
-</div>
+
 
 <% results.docs.forEach(function(result){ %>
 <div class="card shadow p-3 mb-5 blurred rounded">

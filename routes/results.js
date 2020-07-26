@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
-const { asyncErrorHandler, isLoggedIn, isAuthor } = require('../middleware/index');
+const { asyncErrorHandler, isLoggedIn, isAuthor, searchFilter } = require('../middleware/index');
 const { 
   resultsIndex,
   newResult, 
@@ -12,7 +12,7 @@ const {
  } = require('../controllers/results');
 
 /* GET results index page /results */
-router.get('/', isLoggedIn, asyncErrorHandler(resultsIndex));
+router.get('/', isLoggedIn, searchFilter, asyncErrorHandler(resultsIndex));
 
 /* GET new result page /results/new */
 router.get('/new', isLoggedIn, newResult);
