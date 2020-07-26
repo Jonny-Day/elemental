@@ -1,11 +1,11 @@
 <%- include('../partials/header.ejs') %>
-<div class="container">
+
     <div class="card blurred">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-6">
                 <h1>Results</h1>
             </div>
-            <div class="col-md-6">
+            <div class="col-6">
                 <form action="/results" method="GET">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="search" name="search" placeholder="Search by Lot Number" value="<%= queryString %>" aria-label="Search by Lot Number" aria-describedby="button-addon2">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 <% results.docs.forEach(function(result){ %>
@@ -35,7 +35,7 @@
 
 <% }); %>
 
-
+<% if(results.docs.length && results.pages > 1) { %>
 <div class="card pages" style = "margin: 20px 0">
     <% if (results.page - 1) { %>
         <a href="/results?page=<%= results.page - 1 %><%= queryString %>">Prev</a>
@@ -51,7 +51,12 @@
         <a href="/results?page=<%= results.page + 1 %><%= queryString %>">Next</a>
     <% } %>
 </div>
-
+<% } else if(results.pages === 1) { %>
+<% } else { %>
+    <div class="card shadow p-3 mb-5 blurred rounded">
+        <h3>No Results Found</h3>
+    </div    
+<% } %>
 
 
 <%- include('../partials/footer.ejs') %>

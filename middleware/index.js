@@ -59,6 +59,7 @@ module.exports = {
         const user = req.user._id
         //get search value from req.query
         let { search } = req.query;
+        search = search.toUpperCase();
         // create dbQuery object
         let dbQueries = []
         let dbUserQuery = {
@@ -68,20 +69,14 @@ module.exports = {
         //if there is a search value, add it to the db query
         if(search){
             //Search to uppercase?
-        let dbSearchQuery = {
-            lotNumber: search,
+            let dbSearchQuery = {
+                lotNumber: search,
+            }
+            dbQueries.push(dbSearchQuery);            
         }
-        dbQueries.push(dbSearchQuery);
-        //Make search value available as a local variable
-        
-           
-        // const delimiter = Object.keys(req.query).length ? '&' : '?';
-        
-        }
-        console.log(dbQueries)
         res.locals.queryString = search;
         res.locals.dbQuery = { $and: dbQueries }
-        // Basically want to make the DB query into {$and: dbQuery }
+      
 
         next();
     }
