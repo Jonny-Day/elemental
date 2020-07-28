@@ -106,7 +106,9 @@ const UICtrl = (function(){
                 const div = document.createElement('div');
                 div.className = `${alertType} alert`;
                 div.innerText = alertMessage
-                sideb.insertBefore(div, sideb.firstChild)
+                const alertBox = document.querySelector('.alert-box')
+                alertBox.appendChild(div);
+                // sideb.insertBefore(div, sideb.firstChild)
 
                 setTimeout(function(){
                     document.querySelector(`.${alertType}`).remove()
@@ -355,6 +357,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
     };
 
     const getMolecularFormulaMassAndComposition = function(event){
+        event.preventDefault();
         //Get molecular formula from input
         const molecularFormula = molecFormInput.value;
         
@@ -386,11 +389,12 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         } else {
             UICtrl.addAlert('warning', 'Please add molecular formula of compound')
         }
-        event.preventDefault();
+        
     };
 
 
     const getActualResults = function(event){
+        event.preventDefault();
         //Take actual results data
         if(actualFormInputC.value !== "" && actualFormInputH.value !== "" && actualFormInputN.value !== ""){
             const actualCarbon = parseFloat(actualFormInputC.value).toFixed(2);
@@ -412,10 +416,11 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         }
         
     
-        event.preventDefault();
+       
     };
 
     const getImpurityValues = function(event){
+        event.preventDefault();
         //If both fields have been filled out, get data from form
         if(impurityFormInput.value !== "" && equivalentsFormInput.value !== ""){
             const formula = impurityFormInput.value;
@@ -446,11 +451,12 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 UICtrl.addAlert('warning', 'Please enter number of equivalents and chemical formula')
             }
             
-            event.preventDefault();
+           
         };
 
         const getCommonImpurity = function(event){
-    
+            event.preventDefault();
+
             if(commonImpurityEquiv.value !== ""){
                 //Get data
                 const impurityToAdd = event.target.id;
@@ -475,10 +481,11 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 UICtrl.addAlert('warning', 'Please enter the number of equivalents')
             }
            
-            event.preventDefault();
+           
         }
 
         const deleteItem = function(event){
+            event.preventDefault();
             //Get target list item id
             const id = parseInt(event.target.parentElement.id);
             //Get the formula array of objects
@@ -496,7 +503,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         }
 
         const finalCHN = function(event){
-            
+            event.preventDefault();
             const totalMassArray = []
              //Get the array of formula objects
             const totalFormulas = ItemCtrl.getFormulas()
@@ -532,10 +539,10 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             //Add CHN to UI
             UICtrl.addExpectedCHN(percentC, percentH, percentN);
 
-            event.preventDefault();
         }
 
         const getPurity = function(){
+            event.preventDefault();
             //Retrieve all the chemical objects
             const formulas = ItemCtrl.getFormulas()
             const totalMassArray = []
@@ -553,16 +560,19 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             //Calculate percentage of each impurity
             const percentImpurities = getPercentageImpurities(formulas, totalMass);
              //Add % purities to the UI
-             UICtrl.addPercentagePurity(purity, percentImpurities);
+            UICtrl.addPercentagePurity(purity, percentImpurities);
+            
         }
 
         const getPercentageImpurities = function(formulas, totalMass){
+            event.preventDefault();
             //Create empty object for the impurities
             const percentageImpurities = {}
             //loop through each formula and add key: value pairs of the id's and their respective % purities.
             formulas.forEach(function(item){       
                 percentageImpurities[item.id] = ((item.mass/totalMass) *100).toFixed(1);
             })
+            event.preventDefault();
 
             return percentageImpurities
         }

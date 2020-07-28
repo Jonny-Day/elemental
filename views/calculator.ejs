@@ -55,117 +55,137 @@
   <%- include('../views/partials/flashmessages.ejs') %>
 
     <div class="container">
-        <div class="side-a">
-            <div class="results">
-                <h3>Elemental Purity Calculator</h3>
-                <h4 class="compound-purity">Percentage Purity is: <span id="percent-display">___%</span></h4>
-    
-                <div>Expected Results</div>
-                <p class="expected">C: H: N:</p>
-                <hr>
-                <div >Actual Results</div>
-                <p class="actual">C: H: N:</p>
-                <hr>
-                
-                <div class="impurity-results" id="impurity-results">
-                Impurities  
-                    <ul class="impurity-list" id="impurity-list">
-                        <!-- <li class="list-item">CH2Cl2 <span>Equiv: 0.05</span> <span>2%</span><i class="fas fa-times delete"></i></li>
-                        <li class="list-item">MeOH <span>Equiv: 0.02</span> <span>0.5%</span><i class="fas fa-times delete"></i></li> -->
-                    </ul>
+        <div class="row">
+            <div class="alert-box col-12"></div>
+        </div>
+        <div class="row">
+            <div class="side-a col-md-6">
+                <div class="results">
+                    <h3>Elemental Purity Calculator</h3>
+                    <h4 class="compound-purity">Percentage Purity is: <span id="percent-display">___%</span></h4>
+        
+                    <div>Expected Results</div>
+                    <p class="expected">C: H: N:</p>
+                    <hr>
+                    <div >Actual Results</div>
+                    <p class="actual">C: H: N:</p>
+                    <hr>
+                    
+                    <div class="impurity-results" id="impurity-results">
+                    Impurities  
+                        <ul class="impurity-list" id="impurity-list">
+                           <!-- LIST ITEMS WILL GO HERE -->
+                        </ul>
+                    </div>
+                    <hr>
+                </div>
+                <div class="instructions">
+                    <h5><strong>Instructions:</strong></h5>
+                    <p class="steps"><strong>Step 1:</strong> Add molecular formula to molecular formula input with spaces between elements</p>
+                    <p class="steps"><strong>Step 2:</strong> Add CHN results to the form and click Add Results</p>
+                    <p class="steps"><strong>Step 3:</strong> Add impurities using a molecular formula or by clicking on a common impurity</p>
+                    <p class="steps"><strong>Step 4:</strong> Click 'Calculate CHN' and try to match the expected results with the actual results</p>
+                    <p class="steps"><strong>Step 5:</strong> When CHN data is matched, click 'Calculate Purity'</p>
+                    
+                </div>
+            </div>
+            <div class="side-b col-md-6">
+                <div class="molecular-form">
+                    <form id="molecular-form">
+                        <div>
+                            <h6><i class="far fa-plus-square"></i> Molecular Formula<span id="formula"></span></h6>
+                        </div>
+                        <div class="molec">
+                            <div>
+                                <input type="text" class="molecular-formula" id="molecular-formula" placeholder="Molecular Formula e.g. C4 H2 O Br">
+                            </div>
+                            <div>
+                                <button class="molecular-btn" id="molecular-btn">Add Compound</button>
+                            </div>
+                          
+                        </div>
+                        
+                        
+                    </form>
                 </div>
                 <hr>
-            </div>
-            <div class="instructions">
-                <h5><strong>Instructions:</strong></h5>
-                <p class="steps"><strong>Step 1:</strong> Add molecular formula to molecular formula input with spaces between elements</p>
-                <p class="steps"><strong>Step 2:</strong> Add CHN results to the form and click Add Results</p>
-                <p class="steps"><strong>Step 3:</strong> Add impurities using a molecular formula or by clicking on a common impurity</p>
-                <p class="steps"><strong>Step 4:</strong> Click 'Calculate CHN' and try to match the expected results with the actual results</p>
-                <p class="steps"><strong>Step 5:</strong> When CHN data is matched, click 'Calculate Purity'</p>
-                
-            </div>
-        </div>
-        <div class="side-b">
-            <div class="molecular-form">
-                <form id="molecular-form">
-                    <h6><i class="far fa-plus-square"></i> Molecular Formula<span id="formula"></span></h6>
-                    <input type="text" class="molecular-formula" id="molecular-formula" placeholder="Molecular Formula e.g. C4 H2 O Br">
-                    <button class="molecular-btn" id="molecular-btn">Add Compound</button>
-                </form>
-            </div>
-            <hr>
-            <div class="actual-form-container">
-                <h6><i class="far fa-plus-square"></i> Add Results</h6>
-                <form id="actual-form">
-                    <div class="actual-inputs">
-                        <div class="actual-container">
-                            <div>
-                                <label for="actual-resultsC">C:</label>
-                                <input type="text" class="actual-results" id="actual-resultsC" placeholder="Enter C%">
+                <div class="actual-form-container">
+                    <h6><i class="far fa-plus-square"></i> Add Results</h6>
+                    <form id="actual-form">
+                        <div class="actual-inputs">
+                            <div class="actual-container">
+                                <div>
+                                    <label for="actual-resultsC">C:</label>
+                                    <input type="text" class="actual-results" id="actual-resultsC" placeholder="Enter C%">
+                                </div>
+                                <div>
+                                    <label for="actual-resultsC">H:</label>
+                                <input type="text" class="actual-results" id="actual-resultsH" placeholder="Enter H%">
+                                </div>
+                                <div>
+                                    <label for="actual-resultsC">N:</label>
+                                    <input type="text" class="actual-results" id="actual-resultsN" placeholder="Enter N%">
+                                </div>
+                                <button class="actual-btn" id="actual-btn">Add Results</button>
                             </div>
-                            <div>
-                                <label for="actual-resultsC">H:</label>
-                            <input type="text" class="actual-results" id="actual-resultsH" placeholder="Enter H%">
+                        
+                        </div>
+                    </form>
+                </div>        
+                <hr>
+                <div class="form impurities">
+                    <h6><i class="far fa-plus-square"></i> Add An Impurity</h6>
+                    <form id="impurity-form" class="impurity-form">
+                        <div class="impurity-inputs">
+                            <div class="impurity-container">
+                                <div>
+                                    <label for="impurity">Impurity Formula</label>
+                                    <input type="text" id="impurity" class="impurity" placeholder="Molecular Formula e.g. C4 H2 O Br">
+                                </div>
+                                <div>
+                                    <label for="equivalents">Equivalents</label>
+                                    <input type="number" class="equivalents" id="equivalents" placeholder="Equivalents">
+                                </div>                       
                             </div>
-                            <div>
-                                <label for="actual-resultsC">N:</label>
-                                <input type="text" class="actual-results" id="actual-resultsN" placeholder="Enter N%">
-                            </div>
-                            <button class="actual-btn" id="actual-btn">Add Results</button>
+                            <button class="impurity-btn" id="impurity-btn">Add Impurity</button>
                         </div>
                     
-                    </div>
-                </form>
-            </div>        
-            <hr>
-            <div class="form impurities">
-                <h6><i class="far fa-plus-square"></i> Add An Impurity</h6>
-                <form id="impurity-form" class="impurity-form">
-                    <div class="impurity-inputs">
-                        <div class="impurity-container">
-                            <div>
-                                <label for="impurity">Impurity Formula</label>
-                                <input type="text" id="impurity" class="impurity" placeholder="Molecular Formula e.g. C4 H2 O Br">
-                            </div>
-                            <div>
-                                <label for="equivalents">Equivalents</label>
-                                <input type="number" class="equivalents" id="equivalents" placeholder="Equivalents">
-                            </div>                       
-                        </div>
-                        <button class="impurity-btn" id="impurity-btn">Add Impurity</button>
-                    </div>
-                
-                   
-                </form>
-            </div>
-    
-            <div class="common-impurities">
-                <h6 class="common"><i class="far fa-plus-square"></i> Common Impurities</h6>
-                <form id="common-impurities">
-                    <label for="common-equiv">Equivalents</label>
-                    <input type="number" id="common-equiv">
-                    <button id ="Dichloromethane" class="common-btn">CH<sub>2</sub>Cl<sub>2</sub></button>
-                    <button id ="EtOAc" class="common-btn">EtOAc</button>
-                    <button id ="MeOH" class="common-btn">MeOH</button>
-                    <button id ="Ether" class="common-btn">Et<sub>2</sub>O</button>
-                    <button id ="Silica" class="common-btn">SiO<sub>2</sub></button>
-                    <button id ="Water" class="common-btn">H<sub>2</sub>O</button>
-                </form>
-                
-            </div>
-            <div class="calculations">
-                <div>
-                    <button class="calculate" id="calculate">Calculate CHN</button>
+                       
+                    </form>
                 </div>
-                <div>
-                    <button class="calculate" id="calculate-purity">Calculate % Purity</button>
+        
+                <div class="common-impurities">
+                    <h6 class="common"><i class="far fa-plus-square"></i> Common Impurities</h6>
+                    <form id="common-impurities">
+                        <label for="common-equiv">Equivalents</label>
+                        <input type="number" id="common-equiv">
+                        <button id ="Dichloromethane" class="common-btn">CH<sub>2</sub>Cl<sub>2</sub></button>
+                        <button id ="EtOAc" class="common-btn">EtOAc</button>
+                        <button id ="MeOH" class="common-btn">MeOH</button>
+                        <button id ="Ether" class="common-btn">Et<sub>2</sub>O</button>
+                        <button id ="Silica" class="common-btn">SiO<sub>2</sub></button>
+                        <button id ="Water" class="common-btn">H<sub>2</sub>O</button>
+                    </form>
+                    
                 </div>
+                <div class="calculations">
+                    <div>
+                        <button class="calculate" id="calculate-chn">Calculate CHN</button>
+                    </div>
+                    <div>
+                        <button class="calculate" id="calculate-purity">Calculate % Purity</button>
+                    </div>
+                    
+                </div>
+              
                 
             </div>
-          
-            
         </div>
+        
+            
+       
+        
+       
         
 
        
