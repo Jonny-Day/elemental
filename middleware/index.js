@@ -59,7 +59,7 @@ module.exports = {
         const user = req.user._id
         //get search value from req.query
         let { search } = req.query;
-        search = search.toUpperCase();
+        // search = search.toUpperCase();
         // create dbQuery object
         let dbQueries = []
         let dbUserQuery = {
