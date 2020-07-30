@@ -14,9 +14,18 @@ module.exports = {
         results.page = Number(results.page)
         res.render('./results/index', { title: 'Results', results, style: '/stylesheets/results.css'});
     },
+    postResult(req, res, next){
+        
+            console.log(req.body);
+        
+            req.session.data = req.body
+            next();          
+    },
     //Result New
     newResult(req, res, next){
-        res.render('results/new', {title: 'New Result', style: '/stylesheets/home.css'})
+        console.log('HERE' + req.session.data)
+        const data = req.session.data
+        res.render('results/new', {title: 'New Result', style: '/stylesheets/home.css', data})
     },
     //Results create
     async createResult(req, res, next){

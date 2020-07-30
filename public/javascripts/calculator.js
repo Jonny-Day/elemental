@@ -12,7 +12,7 @@ const impurityForm = document.querySelector("#impurity-form");
 const impurityFormInput = document.querySelector("#impurity");
 const equivalentsFormInput = document.querySelector("#equivalents");
 const impurityBtn = document.querySelector("#impurity-btn");
-const calculateBtn = document.querySelector("#calculate");
+const calculateBtn = document.querySelector("#calculate-chn");
 const actualFormInputC = document.querySelector("#actual-resultsC");
 const actualFormInputH = document.querySelector("#actual-resultsH");
 const actualFormInputN = document.querySelector("#actual-resultsN");
@@ -29,6 +29,7 @@ const percentDisplay = document.querySelector("#percent-display");
 const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
 const sideb = document.querySelector(".side-b");
+const saveBtn = document.querySelector('.save-btn');
 
 
 //UI CONTROLLER---------------------------------------------------------
@@ -126,6 +127,7 @@ const CalcCtrl = (function(){
 //Need to add way more element masses!
     const elementMasses = {
         H: 1.0079,
+        D: 2.0141,
         B: 10.811,
         C: 12.0107,
         N: 14.0067,
@@ -139,7 +141,10 @@ const CalcCtrl = (function(){
         I: 126.9045,
         Li: 6.941,
         Na: 22.990,
-        K: 39.0983
+        K: 39.0983,
+        Mg: 24.305,
+        Ca: 40.078
+
 
     };
     //Need To Add Their Chemical Formulas. Nested Objects etc
@@ -353,7 +358,8 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         silica.addEventListener("click", getCommonImpurity);
         water.addEventListener("click", getCommonImpurity);
         calculateBtn.addEventListener("click", finalCHN);
-        percentBtn.addEventListener("click", getPurity)
+        percentBtn.addEventListener("click", getPurity);
+        saveBtn.addEventListener("click", saveData);
     };
 
     const getMolecularFormulaMassAndComposition = function(event){
@@ -577,6 +583,20 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             return percentageImpurities
         }
 
+        const saveData = function(){
+            data = { lotNumber: 'PLEASE WORK' };
+            const options = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+
+            fetch('/results/new', options)
+            
+        }
+
 //Public Methods   
 return {
     //Add the event listeners when app is started
@@ -589,5 +609,5 @@ return {
 
 App.init();
 
-
+//NEED TO ADD A FUNCTION THAT SELECTS EVERYTHING I WANT FOR THE FORM BY ID's. BUILD A JS OBJECT AND SUBMIT.
  
