@@ -6,29 +6,29 @@
             <div class="col-md-6">
                 <div class="form-group">    
                         <label for="lot-number">Lot Number</label>
-                        <input class="form-control" type="text" id="lot-number" name="result[lotNumber]" value="<%= data.lotNumber %>">
+                        <input class="form-control" type="text" id="lot-number" name="result[lotNumber]" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="chemical-formula">Chemical Formula</label>
-                        <input class="form-control" type="text" id="chemical-formula" name="result[chemicalFormula]">
+                        <input class="form-control" type="text" id="chemical-formula" name="result[chemicalFormula]" value= "<%= data.chemicalFormula %>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="actual-result">Actual Result</label>
-                        <input class="form-control" type="text" id="actual-result" name="result[actualResult]">
+                        <input class="form-control" type="text" id="actual-result" name="result[actualResult]" value="<%= data.actualCHN %>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="calculated-result">Calculated Result</label>
-                        <input class="form-control" type="text" id="calculated-result" name="result[calculatedResult]">
+                        <input class="form-control" type="text" id="calculated-result" name="result[calculatedResult]" value="<%= data.calculatedCHN %>" disabled>
                     </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="percentage-purity">Percentage Purity</label>
-                    <input class="form-control" type="text" id="percentage-purity" name="result[percentagePurity]">
+                    <input class="form-control" type="text" id="percentage-purity" name="result[percentagePurity]" value="<%= data.purity %>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="impurities">Impurities</label>
-                    <input class="form-control" type="text" id="impurities" name="result[impurities]">
+                    <input class="form-control" type="text" id="impurities" name="result[impurities]" value="<%= data.percentImpurities %>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="notes">Notes</label>

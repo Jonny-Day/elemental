@@ -29,7 +29,7 @@ const percentDisplay = document.querySelector("#percent-display");
 const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
 const sideb = document.querySelector(".side-b");
-const saveBtn = document.querySelector('.save-btn');
+// const saveBtn = document.querySelector('.save-btn');
 
 
 //UI CONTROLLER---------------------------------------------------------
@@ -42,6 +42,7 @@ const UICtrl = (function(){
             formulaDisplay.innerText = ` = (${formula})`;
             molecForm.disabled = true;
             molecBtn.disabled = true;
+            ItemCtrl.addFormData('chemicalFormula', formula);
         },
         addExpectedCHN: function(c, h, n){
             if(isNaN(c)){
@@ -56,6 +57,10 @@ const UICtrl = (function(){
             expected.innerHTML = `
             <strong>C: </strong>${c} % <strong>H: </strong>${h} % <strong>N: </strong>${n} %
             `
+
+            let chnData = `C:${c}%, H:${h}%, N:${n}%`
+            ItemCtrl.addFormData('calculatedCHN', chnData)
+
         },
         addActualCHN: function(c, h, n){
             actual.innerHTML = `
@@ -63,6 +68,8 @@ const UICtrl = (function(){
             `;
             actualForm.disabled = true;
             actualBtn.disabled = true;
+            let chnData = `C:${c}%, H:${h}%, N:${n}%`
+            ItemCtrl.addFormData('actualCHN', chnData);
         },
         addListItem: function(formula, equiv, id){
            const li = document.createElement("li");
@@ -328,6 +335,9 @@ const CalcCtrl = (function(){
 // ITEM CONTROLLER-------------------
 const ItemCtrl = (function(){
     const molecularFormulas = [];
+    const formData = {
+        //form data needed: PURITY, CHEMICAL FORMULA, CALCULATED RESULT, ACTUAL RESULT, IMPURITIES, 
+    }
 
     return {     
         getFormulas: function(){
@@ -336,6 +346,12 @@ const ItemCtrl = (function(){
         addToMolecularFormulaArray: function(formulaObj){
             molecularFormulas.push(formulaObj)
         },
+        addFormData: function(name, data){
+            formData[name] = data;
+        },
+        getFormData: function(){
+            return formData;
+        }
         
     }
 
@@ -359,7 +375,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         water.addEventListener("click", getCommonImpurity);
         calculateBtn.addEventListener("click", finalCHN);
         percentBtn.addEventListener("click", getPurity);
-        saveBtn.addEventListener("click", saveData);
+        // saveBtn.addEventListener("click", saveData);
     };
 
     const getMolecularFormulaMassAndComposition = function(event){
@@ -551,6 +567,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             event.preventDefault();
             //Retrieve all the chemical objects
             const formulas = ItemCtrl.getFormulas()
+            console.log(formulas);
             const totalMassArray = []
             //Create a mass array from the objects
             formulas.forEach(function(item){
@@ -567,6 +584,10 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             const percentImpurities = getPercentageImpurities(formulas, totalMass);
              //Add % purities to the UI
             UICtrl.addPercentagePurity(purity, percentImpurities);
+            ItemCtrl.addFormData('purity', purity);
+            ItemCtrl.addFormData('percentImpurities', percentImpurities)
+
+            saveData();
             
         }
 
@@ -584,7 +605,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         }
 
         const saveData = function(){
-            data = { lotNumber: 'PLEASE WORK' };
+            const data = ItemCtrl.getFormData()
             const options = {
                 method: 'POST',
                 headers: {

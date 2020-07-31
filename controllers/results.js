@@ -23,7 +23,6 @@ module.exports = {
     },
     //Result New
     newResult(req, res, next){
-        console.log('HERE' + req.session.data)
         const data = req.session.data
         res.render('results/new', {title: 'New Result', style: '/stylesheets/home.css', data})
     },
