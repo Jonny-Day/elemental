@@ -29,7 +29,7 @@ const percentDisplay = document.querySelector("#percent-display");
 const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
 const sideb = document.querySelector(".side-b");
-// const saveBtn = document.querySelector('.save-btn');
+
 
 
 //UI CONTROLLER---------------------------------------------------------
@@ -137,6 +137,7 @@ const CalcCtrl = (function(){
         D: 2.0141,
         B: 10.811,
         C: 12.0107,
+        // C13: 13.003,
         N: 14.0067,
         O: 15.9994,
         Si: 28.085,
@@ -345,6 +346,9 @@ const ItemCtrl = (function(){
     const molecularFormulas = [];
     const formData = {
         //form data needed: PURITY, CHEMICAL FORMULA, CALCULATED RESULT, ACTUAL RESULT, IMPURITIES, 
+    }
+    const impurityData = {
+
     }
 
     return {     
@@ -593,7 +597,9 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
              //Add % purities to the UI
             UICtrl.addPercentagePurity(purity, percentImpurities);
             ItemCtrl.addFormData('purity', purity);
-            ItemCtrl.addFormData('percentImpurities', percentImpurities)
+
+
+           
 
             saveData();
             
@@ -608,12 +614,21 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 percentageImpurities[item.id] = ((item.mass/totalMass) *100).toFixed(1);
             })
             event.preventDefault();
+            
 
             return percentageImpurities
         }
 
         const saveData = function(){
+            
             const data = ItemCtrl.getFormData()
+            data.impurities = [];
+
+            const impurities = document.querySelectorAll(".list-item");
+            impurities.forEach(function(impurity){
+                data.impurities.push(` ${impurity.innerText}`);
+            })
+            console.log(data);
             const options = {
                 method: 'POST',
                 headers: {
@@ -622,7 +637,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
                 body: JSON.stringify(data)
             }
 
-            fetch('/results/new', options)
+            fetch('/results/new', options);
             
         }
 
