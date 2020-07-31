@@ -150,9 +150,17 @@ const CalcCtrl = (function(){
         Na: 22.990,
         K: 39.0983,
         Mg: 24.305,
-        Ca: 40.078
-
-
+        Ca: 40.078,
+        Fe: 55.845,
+        Co: 58.933,
+        Ni: 58.693,
+        Cu: 63.546,
+        Rh: 102.91,
+        Pd: 106.42,
+        Ag: 107.87,
+        Ir: 192.22,
+        Pt: 195.08,
+        Au: 196.97
     };
     //Need To Add Their Chemical Formulas. Nested Objects etc
     const commonImpurities = {
