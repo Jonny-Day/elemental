@@ -29,6 +29,7 @@ const percentDisplay = document.querySelector("#percent-display");
 const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
 const sideb = document.querySelector(".side-b");
+const saveBtn = document.querySelector(".save-btn");
 
 
 
@@ -597,7 +598,8 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
              //Add % purities to the UI
             UICtrl.addPercentagePurity(purity, percentImpurities);
             ItemCtrl.addFormData('purity', purity);
-
+            
+            saveBtn.style.display = 'block';
 
            
 

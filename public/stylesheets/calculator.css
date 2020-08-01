@@ -111,6 +111,12 @@ button{
 
 }
 
+.save-btn{
+    display: none;
+    width: 100%;
+}
+
+
 .molecular-formula{
     width:265px;
     margin-right: 5px;
