@@ -29,8 +29,8 @@ const percentDisplay = document.querySelector("#percent-display");
 const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
 const sideb = document.querySelector(".side-b");
-const saveBtn = document.querySelector(".save-btn");
-
+const saveReset = document.querySelector(".save-reset");
+const resetBtn = document.querySelector("#reset-btn");
 
 
 //UI CONTROLLER---------------------------------------------------------
@@ -388,6 +388,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
         water.addEventListener("click", getCommonImpurity);
         calculateBtn.addEventListener("click", finalCHN);
         percentBtn.addEventListener("click", getPurity);
+        resetBtn.addEventListener("click", resetCalc)
         // saveBtn.addEventListener("click", saveData);
     };
 
@@ -599,7 +600,7 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             UICtrl.addPercentagePurity(purity, percentImpurities);
             ItemCtrl.addFormData('purity', purity);
             
-            saveBtn.style.display = 'block';
+            saveReset.style.display = 'block';
 
            
 
@@ -641,6 +642,10 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
 
             fetch('/results/new', options);
             
+        }
+
+        const resetCalc = function(){
+            location.reload();
         }
 
 //Public Methods   

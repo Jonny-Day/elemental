@@ -111,9 +111,14 @@ button{
 
 }
 
-.save-btn{
+.save-reset{
     display: none;
     width: 100%;
+}
+
+.save-reset-btns{
+    display: inline-block;
+    width: 49%;
 }
 
 
