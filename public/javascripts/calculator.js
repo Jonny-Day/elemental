@@ -210,6 +210,12 @@ const CalcCtrl = (function(){
                     chn['H'] = (equivalents * elementMasses.H)
                 } else if (element === 'N'){
                     chn['N'] = (equivalents * elementMasses.N)
+                } else if (element === 'D'){
+                    if(chn.hasOwnProperty('H')){
+                        chn['H'] += (equivalents * elementMasses.H)
+                    } else {
+                        chn['H'] = (equivalents * elementMasses.H)
+                    }
                 }
             })
                 const percentC = ((chn.C / totalElementMasses) * 100).toFixed(2);
@@ -402,6 +408,9 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
             UICtrl.addMolecularFormulaToUI(molecularFormula);
             //Calculate the composition and then use destructuring to get formula array and total mass
             const { formulaArr, totalMass } = CalcCtrl.calculateComposition(molecularFormula);
+
+            console.log(formulaArr);
+
             //Calculate CHN results from the composition results
             const { percentC, percentH, percentN } = CalcCtrl.calculateCHN(formulaArr, totalMass)
             //Add the CHN results to the UI            
