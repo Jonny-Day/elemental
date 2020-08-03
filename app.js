@@ -1,3 +1,4 @@
+require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -11,6 +12,7 @@ const calcResults = require('./routes/results');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const favicon = require('serve-favicon');
+
 //Seed data
 // const seedResults = require('./seeds')
 // seedResults();
@@ -22,8 +24,9 @@ const Chemist = require('./models/chemist')
 
 const app = express();
 
+
 //Connect to database with mongoose (translates objects for insertion into the database)
-mongoose.connect('mongodb://localhost:27017/elemental', 
+mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost:27017/elemental', 
   {useNewUrlParser: true, useUnifiedTopology: true,
   useCreateIndex: true  
 });
