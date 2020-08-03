@@ -12,7 +12,7 @@ const calcResults = require('./routes/results');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const favicon = require('serve-favicon');
-const MongoStore = require('connect-mono')(session);
+const MongoStore = require('connect-mongo')(session);
 
 //Seed data
 // const seedResults = require('./seeds')
