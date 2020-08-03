@@ -7,8 +7,9 @@ module.exports = {
         const dbQuery = res.locals.dbQuery
         let results = await Result.paginate(dbQuery, {
             page: req.query.page || 1,
-            limit: 5
+            limit: 5,
         })
+
         results.page = Number(results.page)
         res.render('results/index', { title: 'Results', results, style: '/stylesheets/results.css'});
     },
