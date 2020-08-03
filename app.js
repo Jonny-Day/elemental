@@ -57,6 +57,7 @@ app.use(session({
   secret: 'meow said the cat',
   resave: false,
   saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
 passport.use(Chemist.createStrategy());
