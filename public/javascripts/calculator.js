@@ -105,8 +105,6 @@ const UICtrl = (function(){
                         span.innerText = `  ${percentImpurities[id]}%`
                     }
                 }
-                
-
             })
             
         },
@@ -138,7 +136,8 @@ const CalcCtrl = (function(){
         D: 2.0141,
         B: 10.811,
         C: 12.0107,
-        // C13: 13.003,
+        //CT is Carbon-13
+        Ct: 13.003,
         N: 14.0067,
         O: 15.9994,
         Si: 28.085,
@@ -216,6 +215,12 @@ const CalcCtrl = (function(){
                     } else {
                         chn['H'] = (equivalents * elementMasses.H)
                     }
+                } else if (element === 'Ct'){
+                    if(chn.hasOwnProperty('C')){
+                        chn['C'] += (equivalents * elementMasses.C)
+                    } else {
+                        chn['C'] = (equivalents * elementMasses.C)
+                    }
                 }
             })
                 const percentC = ((chn.C / totalElementMasses) * 100).toFixed(2);
@@ -231,7 +236,7 @@ const CalcCtrl = (function(){
         calculateComposition: function(formula, equivalents){
             // Take molecular formula and turn each element + equivalents into an array
             const formulaArr = formula.split(" ");
-        
+                    
             let amountArray = [];
             let totalMassArr = [];
                       
@@ -240,7 +245,7 @@ const CalcCtrl = (function(){
                     amountArray.push(amount);
                        
             });
-
+            
             //accounting for element symbols that have two letters
             amountArray.forEach(function(item = 1){
                 let pattern = /[a-z]/;
@@ -401,11 +406,15 @@ const App = (function(CalcCtrl, UICtrl, ItemCtrl){
     const getMolecularFormulaMassAndComposition = function(event){
         event.preventDefault();
         //Get molecular formula from input
-        const molecularFormula = molecFormInput.value;
+        
+        const molecularFormulaInput = molecFormInput.value;
+        const molecularFormula = molecularFormulaInput.replace('(13C)', 'Ct');
         
         if(molecularFormula !== ""){
             //Add formula to the UI
-            UICtrl.addMolecularFormulaToUI(molecularFormula);
+            UICtrl.addMolecularFormulaToUI(molecularFormulaInput);
+             //Check for 13C
+            
             //Calculate the composition and then use destructuring to get formula array and total mass
             const { formulaArr, totalMass } = CalcCtrl.calculateComposition(molecularFormula);
 
@@ -669,5 +678,4 @@ return {
 
 App.init();
 
-//NEED TO ADD A FUNCTION THAT SELECTS EVERYTHING I WANT FOR THE FORM BY ID's. BUILD A JS OBJECT AND SUBMIT.
  
