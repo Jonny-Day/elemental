@@ -1,40 +1,52 @@
-const compoundPurity = document.querySelector(".compound-purity");
+// const compoundPurity = document.querySelector(".compound-purity");
+// const expected = document.querySelector(".expected");
+// const actual = document.querySelector(".actual");
+// const actualBtn = document.querySelector("#actual-btn");
+// const impurityList = document.querySelector("#impurity-list");
+// const molecForm = document.querySelector("#molecular-form");
+// const molecFormInput = document.querySelector("#molecular-formula");
+// const molecularFormDiv = document.querySelector(".molecular-formula");
+// const molecBtn = document.querySelector("#molecular-btn");
+// const formulaDisplay = document.querySelector("#formula");
+// const impurityForm = document.querySelector("#impurity-form");
+// const impurityFormInput = document.querySelector("#impurity");
+// const equivalentsFormInput = document.querySelector("#equivalents");
+// const impurityBtn = document.querySelector("#impurity-btn");
+// const calculateBtn = document.querySelector("#calculate-chn");
+// const actualFormInputC = document.querySelector("#actual-resultsC");
+// const actualFormInputH = document.querySelector("#actual-resultsH");
+// const actualFormInputN = document.querySelector("#actual-resultsN");
+// const actualForm = document.querySelector("#actual-form");
+// const commonImpurityEquiv = document.querySelector("#common-equiv");
+// const dcm = document.querySelector("#Dichloromethane");
+// const etoac = document.querySelector("#EtOAc");
+// const meoh = document.querySelector("#MeOH");
+// const ether = document.querySelector("#Ether");
+// const silica = document.querySelector("#Silica");
+// const water = document.querySelector("#Water");
+// const percentBtn = document.querySelector("#calculate-purity");
+// const percentDisplay = document.querySelector("#percent-display");
+// const impurityPercent = document.querySelector(".percent-impurity");
+// const instructions = document.querySelector(".instructions");
+// const sideb = document.querySelector(".side-b");
+// const saveReset = document.querySelector(".save-reset");
+// const resetBtn = document.querySelector("#reset-btn");
+
+
+//UI CONTROLLER---------------------------------------------------------
+const UICtrl = (function(){
+
+//UI QUERY SELECTORS 
 const expected = document.querySelector(".expected");
 const actual = document.querySelector(".actual");
 const actualBtn = document.querySelector("#actual-btn");
 const impurityList = document.querySelector("#impurity-list");
 const molecForm = document.querySelector("#molecular-form");
-const molecFormInput = document.querySelector("#molecular-formula");
-const molecularFormDiv = document.querySelector(".molecular-formula");
 const molecBtn = document.querySelector("#molecular-btn");
 const formulaDisplay = document.querySelector("#formula");
-const impurityForm = document.querySelector("#impurity-form");
-const impurityFormInput = document.querySelector("#impurity");
-const equivalentsFormInput = document.querySelector("#equivalents");
-const impurityBtn = document.querySelector("#impurity-btn");
-const calculateBtn = document.querySelector("#calculate-chn");
-const actualFormInputC = document.querySelector("#actual-resultsC");
-const actualFormInputH = document.querySelector("#actual-resultsH");
-const actualFormInputN = document.querySelector("#actual-resultsN");
 const actualForm = document.querySelector("#actual-form");
-const commonImpurityEquiv = document.querySelector("#common-equiv");
-const dcm = document.querySelector("#Dichloromethane");
-const etoac = document.querySelector("#EtOAc");
-const meoh = document.querySelector("#MeOH");
-const ether = document.querySelector("#Ether");
-const silica = document.querySelector("#Silica");
-const water = document.querySelector("#Water");
-const percentBtn = document.querySelector("#calculate-purity");
 const percentDisplay = document.querySelector("#percent-display");
-const impurityPercent = document.querySelector(".percent-impurity");
 const instructions = document.querySelector(".instructions");
-const sideb = document.querySelector(".side-b");
-const saveReset = document.querySelector(".save-reset");
-const resetBtn = document.querySelector("#reset-btn");
-
-
-//UI CONTROLLER---------------------------------------------------------
-const UICtrl = (function(){
 
     //PUBLIC METHODS
     return{
@@ -119,12 +131,12 @@ const UICtrl = (function(){
 
                 setTimeout(function(){
                     document.querySelector(`.${alertType}`).remove()
-                    }, 2500);
+                    }, 3000);
             } 
             
         }
     }
-})();
+})()
 
 
 //CALCULATION CONTROLLER----------------------------------------------
@@ -403,6 +415,29 @@ const ItemCtrl = (function(){
 
 
 const App = (function(CalcCtrl, UICtrl, ItemCtrl){
+
+//APP BASED QUERY SELECTORS
+const impurityList = document.querySelector("#impurity-list");
+const molecForm = document.querySelector("#molecular-form");
+const molecFormInput = document.querySelector("#molecular-formula");
+const impurityFormInput = document.querySelector("#impurity");
+const equivalentsFormInput = document.querySelector("#equivalents");
+const impurityBtn = document.querySelector("#impurity-btn");
+const calculateBtn = document.querySelector("#calculate-chn");
+const actualFormInputC = document.querySelector("#actual-resultsC");
+const actualFormInputH = document.querySelector("#actual-resultsH");
+const actualFormInputN = document.querySelector("#actual-resultsN");
+const actualForm = document.querySelector("#actual-form");
+const commonImpurityEquiv = document.querySelector("#common-equiv");
+const dcm = document.querySelector("#Dichloromethane");
+const etoac = document.querySelector("#EtOAc");
+const meoh = document.querySelector("#MeOH");
+const ether = document.querySelector("#Ether");
+const silica = document.querySelector("#Silica");
+const water = document.querySelector("#Water");
+const percentBtn = document.querySelector("#calculate-purity");
+const saveReset = document.querySelector(".save-reset");
+const resetBtn = document.querySelector("#reset-btn");
 
     //EVENT LISTENERS
     const loadEventListeners = function(){
