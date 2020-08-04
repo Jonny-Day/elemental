@@ -327,6 +327,7 @@ const CalcCtrl = (function(){
         },
         calculateFinalCHN: function(totalMolecularFormulaArray, totalChemicalMasses){
             const chn = {};
+            console.log(totalMolecularFormulaArray)
             totalMolecularFormulaArray.forEach(function(item){
                 const element = item[0]
                 const equivalents = item[1]
@@ -337,6 +338,18 @@ const CalcCtrl = (function(){
                     chn['H'] = (equivalents * elementMasses.H)
                 } else if (element === 'N'){
                     chn['N'] = (equivalents * elementMasses.N)
+                } else if (element === 'D'){
+                    if(chn.hasOwnProperty('H')){
+                        chn['H'] += (equivalents * elementMasses.H)
+                    } else {
+                        chn['H'] = (equivalents * elementMasses.H)
+                    }
+                } else if (element === 'Ct'){
+                    if(chn.hasOwnProperty('C')){
+                        chn['C'] += (equivalents * elementMasses.C)
+                    } else {
+                        chn['C'] = (equivalents * elementMasses.C)
+                    }
                 }
             })
 
