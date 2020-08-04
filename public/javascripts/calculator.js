@@ -136,7 +136,7 @@ const CalcCtrl = (function(){
         D: 2.0141,
         B: 10.811,
         C: 12.0107,
-        //CT is Carbon-13
+        //Ct is Carbon-13
         Ct: 13.003,
         N: 14.0067,
         O: 15.9994,
@@ -242,9 +242,15 @@ const CalcCtrl = (function(){
                       
             formulaArr.forEach(function(element){
                     let amount = element.split("");
+                    if(amount.length === 3){
+                        amount[1] += amount[2]
+                        amount.splice(2,1);
+                    }
                     amountArray.push(amount);
                        
             });
+            console.log(formulaArr)
+            console.log(amountArray);
             
             //accounting for element symbols that have two letters
             amountArray.forEach(function(item = 1){
@@ -286,7 +292,7 @@ const CalcCtrl = (function(){
             console.log(totalMass, mappedArray)
             
             return {
-                totalMass: totalMass,
+                totalMass,
                 formulaArr: mappedArray
             }
             
