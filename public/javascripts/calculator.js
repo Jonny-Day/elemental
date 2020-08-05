@@ -182,25 +182,9 @@ const CalcCtrl = (function(){
             totalMolecularFormulaArray.forEach(function(item){
                 const element = item[0]
                 const equivalents = item[1]
-                if(element === 'C'){
-                    chn['C'] = (equivalents * elementMasses.C)
-                } else if (element === 'H'){
-                    chn['H'] = (equivalents * elementMasses.H)
-                } else if (element === 'N'){
-                    chn['N'] = (equivalents * elementMasses.N)
-                } else if (element === 'D'){
-                    if(chn.hasOwnProperty('H')){
-                        chn['H'] += (equivalents * elementMasses.H)
-                    } else {
-                        chn['H'] = (equivalents * elementMasses.H)
-                    }
-                } else if (element === 'Ct'){
-                    if(chn.hasOwnProperty('C')){
-                        chn['C'] += (equivalents * elementMasses.C)
-                    } else {
-                        chn['C'] = (equivalents * elementMasses.C)
-                    }
-                }
+
+                CalcCtrl.createElementEquivalentsObject(element, equivalents, chn);
+
             })
                 const percentC = ((chn.C / totalElementMasses) * 100).toFixed(2);
                 const percentH = ((chn.H / totalElementMasses) * 100).toFixed(2);
@@ -279,6 +263,27 @@ const CalcCtrl = (function(){
             }
             
         },
+        createElementEquivalentsObject: function(element, equivalents, chn){
+            if(element === 'C'){
+                chn['C'] = (equivalents * elementMasses.C)
+            } else if (element === 'H'){
+                chn['H'] = (equivalents * elementMasses.H)
+            } else if (element === 'N'){
+                chn['N'] = (equivalents * elementMasses.N)
+            } else if (element === 'D'){
+                if(chn.hasOwnProperty('H')){
+                    chn['H'] += (equivalents * elementMasses.H)
+                } else {
+                    chn['H'] = (equivalents * elementMasses.H)
+                }
+            } else if (element === 'Ct'){
+                if(chn.hasOwnProperty('C')){
+                    chn['C'] += (equivalents * elementMasses.C)
+                } else {
+                    chn['C'] = (equivalents * elementMasses.C)
+                }
+            }
+        },
         calculateMassOfImpurity: function(equivalents, molecularWeight){
             const massOfImpurity = equivalents * molecularWeight;
             return massOfImpurity
@@ -315,30 +320,12 @@ const CalcCtrl = (function(){
         },
         calculateFinalCHN: function(totalMolecularFormulaArray, totalChemicalMasses){
             const chn = {};
-            console.log(totalMolecularFormulaArray)
+        
             totalMolecularFormulaArray.forEach(function(item){
                 const element = item[0]
                 const equivalents = item[1]
 
-                if(element === 'C'){
-                    chn['C'] = (equivalents * elementMasses.C)
-                } else if (element === 'H'){
-                    chn['H'] = (equivalents * elementMasses.H)
-                } else if (element === 'N'){
-                    chn['N'] = (equivalents * elementMasses.N)
-                } else if (element === 'D'){
-                    if(chn.hasOwnProperty('H')){
-                        chn['H'] += (equivalents * elementMasses.H)
-                    } else {
-                        chn['H'] = (equivalents * elementMasses.H)
-                    }
-                } else if (element === 'Ct'){
-                    if(chn.hasOwnProperty('C')){
-                        chn['C'] += (equivalents * elementMasses.C)
-                    } else {
-                        chn['C'] = (equivalents * elementMasses.C)
-                    }
-                }
+                CalcCtrl.createElementEquivalentsObject(element, equivalents, chn)
             })
 
                 const percentC = ((chn.C / totalChemicalMasses) * 100).toFixed(2);
