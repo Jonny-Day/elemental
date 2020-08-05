@@ -1,5 +1,3 @@
-
-
 //UI CONTROLLER---------------------------------------------------------
 const UICtrl = (function(){
 
@@ -40,7 +38,7 @@ const instructions = document.querySelector(".instructions");
 
             let chnData = `C:${c}%, H:${h}%, N:${n}%`
             ItemCtrl.addFormData('calculatedCHN', chnData)
-
+            this.expectedResultsColor('black')
         },
         addActualCHN: function(c, h, n){
             actual.innerHTML = `
@@ -62,6 +60,7 @@ const instructions = document.querySelector(".instructions");
            `;
            impurityList.appendChild(li);
            instructions.style.display = "none";
+           this.expectedResultsColor('red')
         },
         deleteListItem: function(event){
             if (event.target.classList.contains("delete")){
@@ -94,13 +93,14 @@ const instructions = document.querySelector(".instructions");
                 div.innerText = alertMessage
                 const alertBox = document.querySelector('.alert-box')
                 alertBox.appendChild(div);
-                // sideb.insertBefore(div, sideb.firstChild)
-
                 setTimeout(function(){
                     document.querySelector(`.${alertType}`).remove()
                     }, 3000);
             } 
             
+        },
+        expectedResultsColor: function(type){
+            expected.style.color = type;
         }
     }
 })()
@@ -546,7 +546,6 @@ const resetBtn = document.querySelector("#reset-btn");
                 UICtrl.addAlert('warning', 'Please enter the number of equivalents')
             }
            
-           
         }
 
         const deleteItem = function(event){
@@ -631,8 +630,6 @@ const resetBtn = document.querySelector("#reset-btn");
             
             saveReset.style.display = 'block';
 
-           
-
             saveData();
             
         }
@@ -645,9 +642,7 @@ const resetBtn = document.querySelector("#reset-btn");
             formulas.forEach(function(item){       
                 percentageImpurities[item.id] = ((item.mass/totalMass) *100).toFixed(1);
             })
-            event.preventDefault();
             
-
             return percentageImpurities
         }
 
@@ -655,12 +650,12 @@ const resetBtn = document.querySelector("#reset-btn");
             
             const data = ItemCtrl.getFormData()
             data.impurities = [];
-
             const impurities = document.querySelectorAll(".list-item");
+            
             impurities.forEach(function(impurity){
                 data.impurities.push(` ${impurity.innerText}`);
             })
-            console.log(data);
+
             const options = {
                 method: 'POST',
                 headers: {
