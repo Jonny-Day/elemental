@@ -1,36 +1,3 @@
-// const compoundPurity = document.querySelector(".compound-purity");
-// const expected = document.querySelector(".expected");
-// const actual = document.querySelector(".actual");
-// const actualBtn = document.querySelector("#actual-btn");
-// const impurityList = document.querySelector("#impurity-list");
-// const molecForm = document.querySelector("#molecular-form");
-// const molecFormInput = document.querySelector("#molecular-formula");
-// const molecularFormDiv = document.querySelector(".molecular-formula");
-// const molecBtn = document.querySelector("#molecular-btn");
-// const formulaDisplay = document.querySelector("#formula");
-// const impurityForm = document.querySelector("#impurity-form");
-// const impurityFormInput = document.querySelector("#impurity");
-// const equivalentsFormInput = document.querySelector("#equivalents");
-// const impurityBtn = document.querySelector("#impurity-btn");
-// const calculateBtn = document.querySelector("#calculate-chn");
-// const actualFormInputC = document.querySelector("#actual-resultsC");
-// const actualFormInputH = document.querySelector("#actual-resultsH");
-// const actualFormInputN = document.querySelector("#actual-resultsN");
-// const actualForm = document.querySelector("#actual-form");
-// const commonImpurityEquiv = document.querySelector("#common-equiv");
-// const dcm = document.querySelector("#Dichloromethane");
-// const etoac = document.querySelector("#EtOAc");
-// const meoh = document.querySelector("#MeOH");
-// const ether = document.querySelector("#Ether");
-// const silica = document.querySelector("#Silica");
-// const water = document.querySelector("#Water");
-// const percentBtn = document.querySelector("#calculate-purity");
-// const percentDisplay = document.querySelector("#percent-display");
-// const impurityPercent = document.querySelector(".percent-impurity");
-// const instructions = document.querySelector(".instructions");
-// const sideb = document.querySelector(".side-b");
-// const saveReset = document.querySelector(".save-reset");
-// const resetBtn = document.querySelector("#reset-btn");
 
 
 //UI CONTROLLER---------------------------------------------------------
@@ -52,7 +19,7 @@ const instructions = document.querySelector(".instructions");
     return{
         addMolecularFormulaToUI: function(formula){
             formula = formula.replace(/\s/g, "");
-            formulaDisplay.innerText = ` = (${formula})`;
+            formulaDisplay.innerText = ` = ${formula}`;
             molecForm.disabled = true;
             molecBtn.disabled = true;
             ItemCtrl.addFormData('chemicalFormula', formula);
@@ -248,16 +215,14 @@ const CalcCtrl = (function(){
         calculateComposition: function(formula, equivalents){
             // Take molecular formula and turn each element + equivalents into an array
             const formulaArr = formula.split(" ");
+            console.log(formulaArr)
                     
             let amountArray = [];
             let totalMassArr = [];
                       
             formulaArr.forEach(function(element){
                     let amount = element.split("");
-                    if(amount.length === 3){
-                        amount[1] += amount[2]
-                        amount.splice(2,1);
-                    }
+                  
                     amountArray.push(amount);
                        
             });
@@ -272,6 +237,11 @@ const CalcCtrl = (function(){
                     item[0] += item[1];
 		            item.splice(1, 1);
                 };
+                //accounting for double digits
+                if(item.length === 3){
+                    item[1] += item[2]
+                    item.splice(2,1);
+                }
             })
             
             // create new array with equivalents parsed into numbers
@@ -302,9 +272,9 @@ const CalcCtrl = (function(){
             //add up all the total masses in totalMassArray
             const totalMass = totalMassArr.reduce((acc, mass) => acc + mass);
             console.log(totalMass, mappedArray)
-            
+            console.log(mappedArray)
             return {
-                totalMass,
+                totalMass: totalMass,
                 formulaArr: mappedArray
             }
             
