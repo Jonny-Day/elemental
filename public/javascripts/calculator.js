@@ -199,8 +199,7 @@ const CalcCtrl = (function(){
         calculateComposition: function(formula, equivalents){
             // Take molecular formula and turn each element + equivalents into an array
             const formulaArr = formula.split(" ");
-            console.log(formulaArr)
-                    
+                                
             let amountArray = [];
             let totalMassArr = [];
                       
@@ -210,9 +209,6 @@ const CalcCtrl = (function(){
                     amountArray.push(amount);
                        
             });
-            console.log(formulaArr)
-            console.log(amountArray);
-            
             //accounting for element symbols that have two letters
             amountArray.forEach(function(item = 1){
                 let pattern = /[a-z]/;
@@ -255,8 +251,6 @@ const CalcCtrl = (function(){
              });
             //add up all the total masses in totalMassArray
             const totalMass = totalMassArr.reduce((acc, mass) => acc + mass);
-            console.log(totalMass, mappedArray)
-            console.log(mappedArray)
             return {
                 totalMass: totalMass,
                 formulaArr: mappedArray
@@ -327,7 +321,7 @@ const CalcCtrl = (function(){
 
                 CalcCtrl.createElementEquivalentsObject(element, equivalents, chn)
             })
-
+            //THIS CAN BE REFACTORED?
                 const percentC = ((chn.C / totalChemicalMasses) * 100).toFixed(2);
                 const percentH = ((chn.H / totalChemicalMasses) * 100).toFixed(2);
                 const percentN = ((chn.N / totalChemicalMasses) * 100).toFixed(2);
@@ -344,12 +338,7 @@ const CalcCtrl = (function(){
 // ITEM CONTROLLER-------------------
 const ItemCtrl = (function(){
     const molecularFormulas = [];
-    const formData = {
-        //form data needed: PURITY, CHEMICAL FORMULA, CALCULATED RESULT, ACTUAL RESULT, IMPURITIES, 
-    }
-    const impurityData = {
-
-    }
+    const formData = {}
 
     return {     
         getFormulas: function(){
@@ -424,8 +413,7 @@ const resetBtn = document.querySelector("#reset-btn");
         if(molecularFormula !== ""){
             //Add formula to the UI
             UICtrl.addMolecularFormulaToUI(molecularFormulaInput);
-             //Check for 13C
-            
+                         
             //Calculate the composition and then use destructuring to get formula array and total mass
             const { formulaArr, totalMass } = CalcCtrl.calculateComposition(molecularFormula);
 

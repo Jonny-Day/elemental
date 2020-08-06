@@ -8,6 +8,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     padding: 50px;
+    background-repeat: no-repeat;
     
 }
 

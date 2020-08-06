@@ -16,6 +16,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0 auto;
+    background-repeat: no-repeat;
 }
 
 .nav-link{
@@ -120,6 +121,10 @@ button{
     display: inline-block;
     width: 49%;
 }
+
+/* .title{
+   text-align: center;
+} */
 
 
 .molecular-formula{
