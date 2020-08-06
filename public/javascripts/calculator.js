@@ -429,8 +429,6 @@ const resetBtn = document.querySelector("#reset-btn");
             //Calculate the composition and then use destructuring to get formula array and total mass
             const { formulaArr, totalMass } = CalcCtrl.calculateComposition(molecularFormula);
 
-            console.log(formulaArr);
-
             //Calculate CHN results from the composition results
             const { percentC, percentH, percentN } = CalcCtrl.calculateCHN(formulaArr, totalMass)
             //Add the CHN results to the UI            
@@ -443,7 +441,7 @@ const resetBtn = document.querySelector("#reset-btn");
                 molecularFormulaObject[element[0]] = element[1];
             });
             //Generate random ID for object
-            molecularFormulaObject['id'] = (Math.floor(Math.random() * 10000000))
+            molecularFormulaObject['id'] = generateID()
             //Add mass to object
             molecularFormulaObject['mass'] = totalMass
             //Add object to item controller
@@ -503,7 +501,7 @@ const resetBtn = document.querySelector("#reset-btn");
                 molecularFormulaObject[element[0]] = element[1];
             });
             //Generate random ID for object
-            molecularFormulaObject['id'] = (Math.floor(Math.random() * 10000000))
+            molecularFormulaObject['id'] = generateID()
             //Add impurity mass to the object
             molecularFormulaObject['mass'] = massOfImpurity;
             //Update the UI 
@@ -532,7 +530,7 @@ const resetBtn = document.querySelector("#reset-btn");
                 //calculate formula and add to item controller
                 const molecularFormulaObject = CalcCtrl.calculateCommonElementEquivalents(impurityToAdd, commonEquivalents);
                 //Generate random ID for object
-                molecularFormulaObject['id'] = (Math.floor(Math.random() * 10000000));
+                molecularFormulaObject['id'] = generateID();
                 //Add mass to object
                 molecularFormulaObject['mass'] = massOfImpurity;
                 //Add impurity object to item controller
@@ -670,6 +668,10 @@ const resetBtn = document.querySelector("#reset-btn");
 
         const resetCalc = function(){
             location.reload();
+        }
+
+        const generateID = function(){
+            return (Math.floor(Math.random() * 10000000));
         }
 
 //Public Methods   
