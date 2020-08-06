@@ -184,31 +184,23 @@ const CalcCtrl = (function(){
                 const equivalents = item[1]
 
                 CalcCtrl.createElementEquivalentsObject(element, equivalents, chn);
-
-            })
-                const percentC = ((chn.C / totalElementMasses) * 100).toFixed(2);
-                const percentH = ((chn.H / totalElementMasses) * 100).toFixed(2);
-                const percentN = ((chn.N / totalElementMasses) * 100).toFixed(2);
+            })    
                 
-                return {
-                    percentC,
-                    percentH,
-                    percentN
-        }
+            return this.getCHNvalues(chn, totalElementMasses);
+
     },
         calculateComposition: function(formula, equivalents){
             // Take molecular formula and turn each element + equivalents into an array
             const formulaArr = formula.split(" ");
-                                
+
             let amountArray = [];
             let totalMassArr = [];
                       
             formulaArr.forEach(function(element){
                     let amount = element.split("");
-                  
                     amountArray.push(amount);
-                       
             });
+
             //accounting for element symbols that have two letters
             amountArray.forEach(function(item = 1){
                 let pattern = /[a-z]/;
@@ -321,16 +313,19 @@ const CalcCtrl = (function(){
 
                 CalcCtrl.createElementEquivalentsObject(element, equivalents, chn)
             })
-            //THIS CAN BE REFACTORED?
-                const percentC = ((chn.C / totalChemicalMasses) * 100).toFixed(2);
-                const percentH = ((chn.H / totalChemicalMasses) * 100).toFixed(2);
-                const percentN = ((chn.N / totalChemicalMasses) * 100).toFixed(2);
-                
-                return {
-                    percentC,
-                    percentH,
-                    percentN
-            }
+            
+            return this.getCHNvalues(chn, totalChemicalMasses);
+
+        },
+        getCHNvalues: function(chn, totalMass){
+            const percentC = ((chn.C / totalMass) * 100).toFixed(2);
+            const percentH = ((chn.H / totalMass) * 100).toFixed(2);
+            const percentN = ((chn.N / totalMass) * 100).toFixed(2);
+            return {
+                percentC,
+                percentH,
+                percentN
+        }
         }
     }
 })();
@@ -399,8 +394,7 @@ const resetBtn = document.querySelector("#reset-btn");
         water.addEventListener("click", getCommonImpurity);
         calculateBtn.addEventListener("click", finalCHN);
         percentBtn.addEventListener("click", getPurity);
-        resetBtn.addEventListener("click", resetCalc)
-        // saveBtn.addEventListener("click", saveData);
+        resetBtn.addEventListener("click", resetCalc);
     };
 
     const getMolecularFormulaMassAndComposition = function(event){
@@ -465,9 +459,7 @@ const resetBtn = document.querySelector("#reset-btn");
         } else {
             UICtrl.addAlert('warning', 'Please fill out all three actual results fields or enter 0 if not present in compound')
         }
-        
-    
-       
+             
     };
 
     const getImpurityValues = function(event){
@@ -554,7 +546,7 @@ const resetBtn = document.querySelector("#reset-btn");
 
         const finalCHN = function(event){
             event.preventDefault();
-            const totalMassArray = []
+            const totalMassArray = [];
              //Get the array of formula objects
             const totalFormulas = ItemCtrl.getFormulas()
             
@@ -567,29 +559,29 @@ const resetBtn = document.querySelector("#reset-btn");
         
             //Merge the objects to give the combined formula
 
-            const combinedFormulaArr = merge(totalFormulas);
-
-            //totalFormula array of objects run through merge
-            function merge(totalFormulas){
-                //for each of the objects
-                const merged = totalFormulas.reduce(function(a, formulaObject){
-                    //Turn each object into an array of arrays containing element and equivalents
-                    array = Object.entries(formulaObject);
-                    //Loop through the array designating the key and the value
-                    array.forEach(([key, val]) => {
-                      a[key] = (a[key] || 0) + val;
-                    });
-                    return a;
-                  }, {});
-        
-                  return Object.entries(merged)  
-                }
+            const combinedFormulaArr = merge(totalFormulas)
+          
             //Calculate final CHN    
             const { percentC, percentH, percentN } = CalcCtrl.calculateFinalCHN(combinedFormulaArr, totalMass);
             //Add CHN to UI
             UICtrl.addExpectedCHN(percentC, percentH, percentN);
 
         }
+
+        const merge = function(totalFormulas){
+            //for each of the objects
+            const merged = totalFormulas.reduce(function(a, formulaObject){
+                //Turn each object into an array of arrays containing element and equivalents
+                array = Object.entries(formulaObject);
+                //Loop through the array designating the key and the value
+                array.forEach(([key, val]) => {
+                  a[key] = (a[key] || 0) + val;
+                });
+                return a;
+              }, {});
+    
+              return Object.entries(merged)  
+            }
 
         const getPurity = function(){
             event.preventDefault();
